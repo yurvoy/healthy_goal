@@ -1,30 +1,38 @@
 package be.intecbrussel.healthy_goal.api;
 
+import be.intecbrussel.healthy_goal.dao.UserDao;
 import be.intecbrussel.healthy_goal.model.User;
-import be.intecbrussel.healthy_goal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RequestMapping("api/v1/user")
 @RestController
 public class UserController {
 
-    private final UserService userService;
-
     @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
+    UserDao userDao;
 
     @PostMapping
-    public void addUser (@RequestBody User user) {
-        userService.addUser(user);
+    public void addUser (@NonNull @RequestBody User user) {
+        userDao.save(user);
     }
 
-    @GetMapping
-    public List<User> getAllUsers () {
-        return userService.getAllUsers();
+    @GetMapping(path = "{id}")
+    public User getUserById(@PathVariable("id") Long id) {
+        return userDao.findById(id)
+                .orElse(null);
+    }
+
+    @DeleteMapping(path = "{id}")
+    public void deleteUserById (@PathVariable("id") Long id) {
+        userDao.deleteById(id);
+    }
+
+    @PutMapping
+    public void updateUser (@PathVariable("id")Long id, @NonNull @RequestBody double newWeight){
+        userDao.findById(id)
+                .orElse(null);
     }
 }

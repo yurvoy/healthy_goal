@@ -1,18 +1,9 @@
 package be.intecbrussel.healthy_goal.dao;
 
 import be.intecbrussel.healthy_goal.model.User;
+import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
-import java.util.UUID;
 
-public interface UserDao {
+public interface UserDao extends CrudRepository<User, Long> {
 
-    int addUser(UUID id, User user);
-
-    default int addUser(User user) {
-        UUID id = UUID.randomUUID();
-        return addUser(id, user);
-    }
-
-    List<User> getAllUsers();
 }

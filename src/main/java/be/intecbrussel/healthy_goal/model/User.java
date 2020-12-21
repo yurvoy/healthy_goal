@@ -1,12 +1,16 @@
 package be.intecbrussel.healthy_goal.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import javax.persistence.*;
 
-import java.util.UUID;
+import java.util.HashMap;
+import java.util.Map;
 
+@Entity
 public class User {
 
-    private final UUID ID;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private final Long ID;
     private final String NAME;
     private final double START_WEIGHT;
     private final double HEIGHT;
@@ -18,12 +22,14 @@ public class User {
     private double healthyMaxWeight;
     private double healthyMinWeight;
     private double weightToLose;
+    @ElementCollection
+    @CollectionTable(name = "user_timeline", joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")})
+    @MapKeyColumn(name = "date")
+    @Column(name = "weight")
+    private Map<Long, Double> weights;
 
 
-    public User(@JsonProperty("id") UUID ID,
-                @JsonProperty("name") String NAME,
-                @JsonProperty("weight") double START_WEIGHT,
-                @JsonProperty("height") double HEIGHT) {
+    public User(Long ID, String NAME, double START_WEIGHT, double HEIGHT) {
         this.ID = ID;
         this.NAME = NAME;
         this.START_WEIGHT = START_WEIGHT;
@@ -37,10 +43,12 @@ public class User {
         } else {
             weightToLose = 0;
         }
+        this.weights = new HashMap<>();
+        weights.put(System.currentTimeMillis(), START_WEIGHT);
     }
 
     //getters
-    public UUID getID() {
+    public Long getID() {
         return ID;
     }
 
@@ -76,8 +84,16 @@ public class User {
         return weightToLose;
     }
 
+    public Map<Long, Double> getWeights() {
+        return weights;
+    }
+
     //weight setter
     public void setCurrentWeight(double currentWeight) {
         this.currentWeight = currentWeight;
+    }
+
+    public void addWeight(double weight) {
+        weights.put(System.currentTimeMillis(), weight);
     }
 }
