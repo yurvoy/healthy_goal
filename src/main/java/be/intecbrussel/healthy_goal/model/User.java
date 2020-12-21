@@ -2,6 +2,8 @@ package be.intecbrussel.healthy_goal.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class User {
@@ -18,6 +20,7 @@ public class User {
     private double healthyMaxWeight;
     private double healthyMinWeight;
     private double weightToLose;
+    private Map<Long, Double> timeline;
 
 
     public User(@JsonProperty("id") UUID ID,
@@ -37,6 +40,7 @@ public class User {
         } else {
             weightToLose = 0;
         }
+        this.timeline = new HashMap<>();
     }
 
     //getters
@@ -76,8 +80,16 @@ public class User {
         return weightToLose;
     }
 
+    public Map<Long, Double> getTimeline() {
+        return timeline;
+    }
+
     //weight setter
     public void setCurrentWeight(double currentWeight) {
         this.currentWeight = currentWeight;
+    }
+
+    public void addWeight(double weight) {
+        timeline.put(System.currentTimeMillis(), weight);
     }
 }
