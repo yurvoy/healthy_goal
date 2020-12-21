@@ -2,6 +2,7 @@ package be.intecbrussel.healthy_goal.dao;
 
 import be.intecbrussel.healthy_goal.model.User;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface UserDao {
@@ -12,4 +13,6 @@ public interface UserDao {
         UUID id = UUID.randomUUID();
         return addUser(id, user);
     }
+
+    List<User> getAllUsers();
 }

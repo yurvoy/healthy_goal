@@ -3,9 +3,11 @@ package be.intecbrussel.healthy_goal.api;
 import be.intecbrussel.healthy_goal.model.User;
 import be.intecbrussel.healthy_goal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+@RequestMapping("api/v1/user")
 @RestController
 public class UserController {
 
@@ -17,7 +19,12 @@ public class UserController {
     }
 
     @PostMapping
-    public void addUser (User user) {
+    public void addUser (@RequestBody User user) {
         userService.addUser(user);
+    }
+
+    @GetMapping
+    public List<User> getAllUsers () {
+        return userService.getAllUsers();
     }
 }
