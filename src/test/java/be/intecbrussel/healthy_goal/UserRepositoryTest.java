@@ -1,6 +1,6 @@
 package be.intecbrussel.healthy_goal;
 
-import be.intecbrussel.healthy_goal.dao.UserDao;
+import be.intecbrussel.healthy_goal.dao.UserDAO;
 import be.intecbrussel.healthy_goal.model.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +10,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class UserRepositoryTest {
 
     @Autowired
-    UserDao userDao;
+    UserDAO userDao;
 
     @Test
     public void test() {
-        User user = userDao.save(new User(101L, "fat yvo", 95, 1.76));
-        user.getWeights().put(System.currentTimeMillis(), 12.0);
+        User user = userDao.save(new User());
         userDao.save(user);
     }
 }

@@ -1,32 +1,136 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="google-signin-client_id" content="901938723589-3d54ii30ra1pi1tb6bstepl215l8hf9l.apps.googleusercontent.com">
-    <title>Healthy goal login</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Spring Security OAuth2 | Login</title>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width"/>
+    <base href="/"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/font-awesome/css/all.min.css}">
+    <style>
+        body{
+            background: #f1f2f7;
+        }
+        .login-form {
+            width: 400px;
+            margin: 60px auto;
+            font-size: 15px;
+        }
+
+        .login-form form {
+            margin-bottom: 15px;
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            background-color: #ffffff;
+        }
+
+        .login-form h2 {
+            margin: 0 0 15px;
+        }
+
+        .form-control, .btn {
+            min-height: 38px;
+        }
+
+        .login-btn {
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .or-seperator {
+            margin: 20px 0 10px;
+            text-align: center;
+            border-top: 1px solid #ccc;
+        }
+
+        .or-seperator span {
+            font-weight: 500;
+            padding: 0 10px;
+            background: #f7f7f7;
+            position: relative;
+            top: -11px;
+            z-index: 1;
+        }
+
+        .social-btn .btn {
+            margin: 10px 0;
+            font-size: 15px;
+            text-align: center;
+            line-height: 24px;
+        }
+    </style>
 </head>
 <body>
-<div class="g-signin2" data-onsuccess="onSignIn" onclick="location.href='index.html'"></div>
+    <div class="login-form">
+        <form th:action="@{/login}" method="post" style="width: 100%">
+            <div class="alert alert-danger" role="alert" th:if="${param.error}">
+                <span>Invalid Credentials</span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
 
-<script>
-    function onSignIn(googleUser) {
-        // Useful data for your client-side scripts:
-        var profile = googleUser.getBasicProfile();
-        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-        console.log('Name: ' + profile.getName());
-        console.log('Image URL: ' + profile.getImageUrl());
-        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+            <div class="alert alert-success" role="alert" th:if="${success}">
+                <span th:text="${success}"></span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <h3 class="text-center">Sign in with</h3>
+            <div class="row social-btn text-center">
+                <div class="col-md-4">
+                    <a th:href="@{/oauth2/authorization/facebook}" class="btn btn-primary"><i class="fab fa-facebook-f fa-lg"></i></a>
+                </div>
+                <div class="col-md-4">
+                    <a th:href="@{/oauth2/authorization/google}" class="btn btn-danger"><i class="fab fa-google fa-lg"></i></a>
+                </div>
+                <div class="col-md-4">
+                    <a th:href="@{/oauth2/authorization/github}" class="btn btn-dark"><i class="fab fa-github fa-lg"></i></a>
+                </div>
+            </div>
+            <div class="or-seperator"><span>OR</span></div>
 
-        // The ID token you need to pass to your backend:
-        var id_token = googleUser.getAuthResponse().id_token;
-        console.log("ID Token: " + id_token);
-    }
-</script>
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <span class="fa fa-user"></span>
+                        </span>
+                    </div>
+                    <input type="text" class="form-control" name="username" placeholder="Username" id="username" required="required">
+                </div>
+            </div>
 
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fa fa-lock"></i>
+                        </span>
+                    </div>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Password" required="required">
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-dark btn-block login-btn">Login</button>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-6 justify-content-start">
+                    <a href="#" class="text-danger">Forgot Password?</a>
+                </div>
+                <div class="col-md-6 text-right">
+                    <a th:href="@{/signup}" class="text-dark">Sign Up</a>
+                </div>
+            </div>
+        </form>
+    </div>
 
+    <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </body>
 </html>

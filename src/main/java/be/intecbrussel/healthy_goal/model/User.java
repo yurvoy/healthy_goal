@@ -1,26 +1,51 @@
 package be.intecbrussel.healthy_goal.model;
 
-import javax.persistence.*;
+import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
+import javax.persistence.*;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+@Data
 @Entity
-public class User {
-
+public class User implements UserDetails, OAuth2User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private final Long ID;
-    private final String NAME;
-    private final double START_WEIGHT;
-    private final double HEIGHT;
-    private final double BMI_MAX = 25;
-    private final double BMI_MIN = 18.5;
+    @Column
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+    @Column
+    private String email;
+    @Column
+    private String name;
+    @Column
+    private String password;
 
+    @Column
+    private String authProvider;
+
+    @Column
+    private String providerId;
+
+    @Transient
+    private Map<String, Object> attributes;
+
+    @Column
+    private double height;
+    @Column(name = "current_weight")
     private double currentWeight;
+    @Column(name = "current_bmi")
     private double currentBMI;
+    @Column(name = "healthy_max")
     private double healthyMaxWeight;
+    @Column(name = "healthy_min")
     private double healthyMinWeight;
+    @Column(name = "to_lose")
     private double weightToLose;
     @ElementCollection
     @CollectionTable(name = "user_timeline", joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")})
@@ -29,71 +54,87 @@ public class User {
     private Map<Long, Double> weights;
 
 
-    public User(Long ID, String NAME, double START_WEIGHT, double HEIGHT) {
-        this.ID = ID;
-        this.NAME = NAME;
-        this.START_WEIGHT = START_WEIGHT;
-        this.HEIGHT = HEIGHT;
-        this.currentWeight = START_WEIGHT;
-        this.currentBMI = currentWeight / Math.pow(HEIGHT, 2);
-        this.healthyMaxWeight = BMI_MAX * Math.pow(HEIGHT, 2);
-        this.healthyMinWeight = BMI_MIN * Math.pow(HEIGHT, 2);
-        if (currentBMI > 25) {
-            weightToLose = currentWeight - healthyMaxWeight;
-        } else {
-            weightToLose = 0;
-        }
-        this.weights = new HashMap<>();
-        weights.put(System.currentTimeMillis(), START_WEIGHT);
+    // GETTERS
+
+    @Override
+    public Map<String, Object> getAttributes() {
+        return attributes;
     }
 
-    //getters
-    public Long getID() {
-        return ID;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
-    public String getNAME() {
-        return NAME;
+    @Override
+    public String getUsername() {
+        return email;
     }
 
-    public double getSTART_WEIGHT() {
-        return START_WEIGHT;
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
     }
 
-    public double getHEIGHT() {
-        return HEIGHT;
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    public double getHeight() {
+        return this.height;
     }
 
     public double getCurrentBMI() {
-        return currentBMI;
+        return this.currentBMI;
     }
 
     public double getCurrentWeight() {
-        return currentWeight;
+        return this.currentWeight;
     }
 
     public double getHealthyMaxWeight() {
-        return healthyMaxWeight;
+        return this.healthyMaxWeight;
     }
 
     public double getHealthyMinWeight() {
-        return healthyMinWeight;
+        return this.healthyMinWeight;
     }
 
     public double getWeightToLose() {
-        return weightToLose;
+        return this.weightToLose;
     }
 
     public Map<Long, Double> getWeights() {
-        return weights;
+        return this.weights;
     }
 
-    //weight setter
+    // SETTER
+
     public void setCurrentWeight(double currentWeight) {
         this.currentWeight = currentWeight;
+        this.currentBMI = this.currentWeight / Math.pow(height, 2.0D);
+        this.healthyMaxWeight = 25.0D * Math.pow(height, 2.0D);
+        this.healthyMinWeight = 18.5D * Math.pow(height, 2.0D);
+        if (this.currentBMI > 25.0D) {
+            this.weightToLose = this.currentWeight - this.healthyMaxWeight;
+        } else {
+            this.weightToLose = 0.0D;
+        }
+        if (weights.isEmpty()) {
+            weights = new HashMap<>();
+        }
+        weights.put(System.currentTimeMillis(), currentWeight);
     }
 
-    public void addWeight(double weight) {
-        weights.put(System.currentTimeMillis(), weight);
-    }
 }

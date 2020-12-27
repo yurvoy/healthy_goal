@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +9,20 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
-<div id="app">BITCH</div>
+<div id="app"></div>
+    <div id="logo">HEALTHY GOAL</div>
 
+    <div id="welcome">
+        <p th:text="${name}" />
+        <h1 th:text = "'Welcome ' + ${name}"></h1>
+    </div>
+    <div id="new-data">New weight
+        <button id="singlebutton" name="singlebutton" class="btn btn-primary">Add</button>
+    </div>
+    <div id="current">Your current weight</div>
+    <div id="weight to lose">Your current weight</div>
+    <div id="graph">Your current weight</div>
+    <div id="del-data">delete one weight</div>
+    <div id="advice">Do you know that making sport every day reduce...</div>
 </body>
 </html>
