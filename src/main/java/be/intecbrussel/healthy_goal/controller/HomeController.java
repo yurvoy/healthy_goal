@@ -1,28 +1,36 @@
 package be.intecbrussel.healthy_goal.controller;
 
 import be.intecbrussel.healthy_goal.model.User;
-import lombok.extern.log4j.Log4j2;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import be.intecbrussel.healthy_goal.service.SocialAuthService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.security.Principal;
 
 @Controller
-@Log4j2
 public class HomeController {
 
-    @Secured("ROLE_USER")
-    @GetMapping({"/", "/home"})
-    public String retrieveFormLoginInfo(Model model,
-                                        @AuthenticationPrincipal User user){
-        // In form-based login flow you get UserDetails as principal while in Oauth based flow you get Oauth2User
-        log.info("user.getUsername() =>" + user.getUsername());
-        log.info("user.getEmail() =>" + user.getEmail());
-        log.info("user.getAuthProvider() =>" + user.getAuthProvider());
-        log.info("user.getProviderId() =>" + user.getProviderId());
-
-        model.addAttribute("name", user.getName());
+    @Autowired
+    private SocialAuthService authService;
+    
+    @RequestMapping(value = "/")
+    public String home(Principal principal, Model model) {
+        User user = authService.extractUserFromAuthInfo(principal);
+        
+        model.addAttribute("user", user);
+        
         return "home";
+    }
+
+    @RequestMapping(value = "/login")
+    public String login() {
+        return "login";
+    }
+
+    @RequestMapping(value = "/logout")
+    public String logout() {
+        return "login";
     }
 }

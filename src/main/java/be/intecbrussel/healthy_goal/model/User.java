@@ -1,39 +1,28 @@
 package be.intecbrussel.healthy_goal.model;
 
 import lombok.Data;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 @Data
 @Entity
-public class User implements UserDetails, OAuth2User {
+public class User{
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-    @Column
-    private String email;
+    private String id;
     @Column
     private String name;
     @Column
+    private String email;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "auth_provider")
+    private AuthProvider provider;
+
+    @Column
     private String password;
-
-    @Column
-    private String authProvider;
-
-    @Column
-    private String providerId;
-
-    @Transient
-    private Map<String, Object> attributes;
 
     @Column
     private double height;
@@ -54,42 +43,17 @@ public class User implements UserDetails, OAuth2User {
     private Map<Long, Double> weights;
 
 
+    // CONSTRUCTOR
+
+    public User(String id, String name, String email, AuthProvider provider) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.provider = provider;
+    }
+
+
     // GETTERS
-
-    @Override
-    public Map<String, Object> getAttributes() {
-        return attributes;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
-    }
-
-    @Override
-    public String getUsername() {
-        return email;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
 
     public double getHeight() {
         return this.height;
@@ -119,6 +83,11 @@ public class User implements UserDetails, OAuth2User {
         return this.weights;
     }
 
+    public AuthProvider getProvider() {
+        return provider;
+    }
+
+
     // SETTER
 
     public void setCurrentWeight(double currentWeight) {
@@ -137,4 +106,7 @@ public class User implements UserDetails, OAuth2User {
         weights.put(System.currentTimeMillis(), currentWeight);
     }
 
+    public void setProvider(AuthProvider provider) {
+        this.provider = provider;
+    }
 }
