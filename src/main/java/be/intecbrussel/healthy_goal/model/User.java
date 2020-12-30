@@ -88,7 +88,12 @@ public class User{
     }
 
 
-    // SETTER
+    // SETTERS
+
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
 
     public void setCurrentWeight(double currentWeight) {
         this.currentWeight = currentWeight;
