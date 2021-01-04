@@ -1,19 +1,24 @@
 package be.intecbrussel.healthy_goal.service;
 
+import be.intecbrussel.healthy_goal.dao.UserDAO;
 import be.intecbrussel.healthy_goal.model.AuthProvider;
 import be.intecbrussel.healthy_goal.model.User;
 import lombok.NonNull;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class SocialAuthService {
     private static final String GOOGLE_ID_FIELD_NAME = "sub";
     private static final String AUTH_DETAILS_NAME_PARAM = "name";
     private static final String AUTH_DETAILS_EMAIL_PARAM = "email";
+    @Autowired
+    private UserDAO userDAO;
 
     public User extractUserFromAuthInfo(@NonNull Principal principal) {
         if (principal instanceof OAuth2Authentication) {
@@ -35,7 +40,13 @@ public class SocialAuthService {
             authProvider = AuthProvider.FACEBOOK;
             extIdStr = (String) oAuth.getUserAuthentication().getPrincipal();
         }
-        return new User(extIdStr, details.get(AUTH_DETAILS_NAME_PARAM), details.get(AUTH_DETAILS_EMAIL_PARAM), authProvider);
+        Optional<User> userOptional = userDAO.findByEmail(details.get(AUTH_DETAILS_EMAIL_PARAM));
+        if (userOptional.isEmpty()){
+            User user = new User(extIdStr, details.get(AUTH_DETAILS_NAME_PARAM), details.get(AUTH_DETAILS_EMAIL_PARAM), authProvider);
+            return userDAO.save(user);
+        } else {
+            return userOptional.get();
+        }
     }
 
     private boolean isGoogle(@NonNull Map<String, String> details) {

@@ -1,10 +1,13 @@
 package be.intecbrussel.healthy_goal.controller;
 
+import be.intecbrussel.healthy_goal.dao.UserDAO;
 import be.intecbrussel.healthy_goal.model.User;
 import be.intecbrussel.healthy_goal.service.SocialAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -15,6 +18,8 @@ public class HomeController {
 
     @Autowired
     private SocialAuthService authService;
+    @Autowired
+    private UserDAO userDAO;
 
     @RequestMapping(value = "/")
     public String home(Principal principal, Model model) {
@@ -35,19 +40,15 @@ public class HomeController {
         return "login";
     }
 
-    @RequestMapping(value = "/setWeight", method = RequestMethod.POST)
-    public String setWeight(Principal principal, Model model, String value) {
-        double weight;
-        try {
-            weight = Double.parseDouble(value);
-        } catch (NumberFormatException nfe) {
-            nfe.printStackTrace();
-            return "wrong value";
-        }
+    @RequestMapping(value = "/setter", method = RequestMethod.POST)
+    public String setter(Principal principal, @ModelAttribute("user") User userForm, ModelMap modelMap) {
         User user = authService.extractUserFromAuthInfo(principal);
 
-        user.setCurrentWeight(weight);
+        user.setHeight(userForm.getHeight());
+        user.setCurrentWeight(userForm.getCurrentWeight());
 
-        return "Current weight changed";
+        userDAO.save(user);
+
+        return "redirect:/";
     }
 }

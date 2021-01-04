@@ -11,7 +11,6 @@ import java.util.Map;
 public class User{
     @Id
     @Column
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
     @Column
     private String name;
@@ -44,6 +43,9 @@ public class User{
 
 
     // CONSTRUCTOR
+
+    public User() {
+    }
 
     public User(String id, String name, String email, AuthProvider provider) {
         this.id = id;
@@ -105,7 +107,7 @@ public class User{
         } else {
             this.weightToLose = 0.0D;
         }
-        if (weights.isEmpty()) {
+        if (weights == null) {
             weights = new HashMap<>();
         }
         weights.put(System.currentTimeMillis(), currentWeight);

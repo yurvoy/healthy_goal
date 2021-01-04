@@ -1,6 +1,7 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
 <body>
-<h1>Home Page</h1>
+<h1>HEALTHY GOAL</h1>
 <div>
     <h3>User Info</h3>
     <div>ID: ${user.id}</div>
@@ -21,14 +22,22 @@
 
 <h3>Setters</h3>
 
-<form action="/setter.jsp" method="post">
-    Your height: <input name="height" type="text" />
-    <input type="submit" value="save" />
-</form>
-<form action="setter.jsp" method="post">
-    Your current weight: <input name="height" type="text" />
-    <input type="submit" value="save" />
-</form>
+<form:form method="POST"
+           action="/setter" modelAttribute="user">
+    <table>
+        <tr>
+            <td><form:label path="height">height</form:label></td>
+            <td><form:input path="height"/></td>
+        </tr>
+        <tr>
+            <td><form:label path="currentWeight">Current weight</form:label></td>
+            <td><form:input path="currentWeight"/></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Submit"/></td>
+        </tr>
+    </table>
+</form:form>
 
 
 <form id="logoutForm" method="POST" action="/add">
