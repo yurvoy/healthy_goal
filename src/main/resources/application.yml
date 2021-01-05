@@ -5,8 +5,8 @@ spring:
       path: /h2
   datasource:
     url: jdbc:h2:/home/yvo/IdeaProjects/Healthy-goal/src/main/resources/data/healthy_goal
-    username: yvo
-    password: intec
+    username:
+    password:
     driverClassName: org.h2.Driver
 
 server:
