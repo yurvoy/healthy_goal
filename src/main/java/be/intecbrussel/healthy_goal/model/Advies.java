@@ -9,7 +9,11 @@ public class Advies {
     private static String[] advies = {
             "there is strong evidence that higher levels of physical activity are linked to lower risk of several types of cancer.",
             "some evidence that exercise is beneficial for bone health and sleep quality.",
-            "physical activity improves immune system function"
+            "physical activity improves immune system function.",
+            "obesity increases your risk of severe illness from COVID-19.",
+            "BMI remains a strong independent risk factor for severe COVID-19",
+            "the effect of BMI on the immune system is more apparent for women.",
+            "weight loss modulates immune system parameters of patients with virus HCV."
     };
 
     public static String getAdvies() {

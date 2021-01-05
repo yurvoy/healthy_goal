@@ -17,7 +17,7 @@
     <div>Healthy manimum weight: ${user.healthyMinWeight}Kg</div>
     <div>Weight to lose: ${user.weightToLose}Kg</div>
     <br>
-    <div>History: MAP HERE</div>
+    <div>TODO History: HASHMAP HERE</div>
 </div>
 
 <h3>Setters</h3>
