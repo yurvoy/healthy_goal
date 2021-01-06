@@ -15,14 +15,26 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
+  thymeleaf:
+#    prefix: classpath:/templates/
+#    suffix: .html
+    cache: false
 
 server:
   port: 8080
   ssl:
-    key-store: keystore.p12
     key-store-password: 123456
+    key-store: keystore.p12
     key-store-type: PKCS12
     key-alias: tomcat
+
+security:
+  basic:
+    enabled: false
+  oauth2:
+    client:
+      preEstablishedRedirectUri: https://localhost:8080/
+
 
 facebook:
   client:
@@ -58,8 +70,3 @@ github:
     scope: user
   resource:
     userInfoUri:  https://api.github.com/user
-
-security:
-  oauth2:
-    client:
-      preEstablishedRedirectUri: https://localhost:8080/

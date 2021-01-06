@@ -1,3 +1,4 @@
+
 package be.intecbrussel.healthy_goal.config;
 
 import org.springframework.context.annotation.Bean;
@@ -12,10 +13,10 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("/WEB-INF/views/");
-        resolver.setSuffix(".jsp");
+        resolver.setPrefix("src/main/resources/templates");
+        resolver.setSuffix(".html");
         resolver.setExposeContextBeansAsAttributes(true);
         return resolver;
     }
-    
+
 }

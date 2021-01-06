@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security5"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Healthy goal login</title>
+</head>
+<body>
+<h3>Login Page</h3>
+
+
+<div>
+    <form th:action="@{/google/login}" method="post">
+        <input type="submit" value="Sign with Google"/>
+    </form>
+    <form th:action="@{/facebook/login}" method="post">
+        <input type="submit" value="Sign with Facebook"/>
+    </form>
+    <form th:action="@{/github/login}" method="post">
+        <input type="submit" value="Sign with Github"/>
+    </form>
+</div>
+
+</body>
+
+</html>

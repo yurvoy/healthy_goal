@@ -45,7 +45,7 @@ public class SocialAuthService {
             extIdStr = (String) oAuth.getUserAuthentication().getPrincipal();
         }
         Optional<User> userOptional = userDAO.findByEmail(details.get(AUTH_DETAILS_EMAIL_PARAM));
-        if (userOptional.isEmpty()){
+        if (userOptional.isEmpty()) {
             User user = new User(extIdStr, details.get(AUTH_DETAILS_NAME_PARAM), details.get(AUTH_DETAILS_EMAIL_PARAM), authProvider);
             return userDAO.save(user);
         } else {

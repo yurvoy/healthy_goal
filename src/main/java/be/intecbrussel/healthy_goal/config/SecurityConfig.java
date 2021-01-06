@@ -31,6 +31,7 @@ import java.util.List;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+
     @Autowired
     private OAuth2ClientContext oauth2ClientContext;
     
