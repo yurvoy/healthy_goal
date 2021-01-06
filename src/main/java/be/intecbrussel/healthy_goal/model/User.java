@@ -92,7 +92,6 @@ public class User{
 
     // SETTERS
 
-
     public void setHeight(double height) {
         this.height = height;
     }

@@ -15,6 +15,7 @@ import java.util.Optional;
 @Service
 public class SocialAuthService {
     private static final String GOOGLE_ID_FIELD_NAME = "sub";
+    private static final String GITHUB_ID_FIELD_NAME = "client_id";
     private static final String AUTH_DETAILS_NAME_PARAM = "name";
     private static final String AUTH_DETAILS_EMAIL_PARAM = "email";
     @Autowired
@@ -36,6 +37,9 @@ public class SocialAuthService {
         if (isGoogle(details)) {
             authProvider = AuthProvider.GOOGLE;
             extIdStr = details.get(GOOGLE_ID_FIELD_NAME);
+        } else if (isGithub(details)) {
+            authProvider = AuthProvider.GITHUB;
+            extIdStr = details.get(GITHUB_ID_FIELD_NAME);
         } else {
             authProvider = AuthProvider.FACEBOOK;
             extIdStr = (String) oAuth.getUserAuthentication().getPrincipal();
@@ -51,5 +55,9 @@ public class SocialAuthService {
 
     private boolean isGoogle(@NonNull Map<String, String> details) {
         return details.containsKey(GOOGLE_ID_FIELD_NAME);
+    }
+
+    private boolean isGithub(@NonNull Map<String, String> details) {
+        return details.containsKey(GITHUB_ID_FIELD_NAME);
     }
 }

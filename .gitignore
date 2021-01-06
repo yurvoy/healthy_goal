@@ -4,6 +4,9 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+# Ignore application configuration
+/config/application.yml
+
 ### STS ###
 .apt_generated
 .classpath
