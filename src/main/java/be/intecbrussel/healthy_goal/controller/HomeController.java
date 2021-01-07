@@ -4,6 +4,7 @@ import be.intecbrussel.healthy_goal.dao.UserDAO;
 import be.intecbrussel.healthy_goal.model.User;
 import be.intecbrussel.healthy_goal.service.SocialAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.security.Principal;
 
 @Controller
-public class HomeController {
+public class HomeController implements ErrorController {
 
     @Autowired
     private SocialAuthService authService;
@@ -50,5 +51,15 @@ public class HomeController {
         userDAO.save(user);
 
         return "redirect:/";
+    }
+
+    @RequestMapping("/error")
+    public String handleError() {
+        return "customError";
+    }
+
+    @Override
+    public String getErrorPath() {
+        return "/some-non-existing-path";
     }
 }

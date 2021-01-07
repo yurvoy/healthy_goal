@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security5"
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -10,6 +9,9 @@
 <body>
 <h1>HEALTHY GOAL</h1>
 Welcome, <span th:text="${#authentication.name}">Name</span>
+<form id="logoutForm" method="POST" action="/add">
+    <button type="submit" style="margin-top: 2rem;">Log Out</button>
+</form>
 <div>
     <table>
         <tr>
@@ -19,21 +21,23 @@ Welcome, <span th:text="${#authentication.name}">Name</span>
             <br>
             Provider: <span th:text="${user.provider}">AuthProdider</span>
             <br><br>
-            Height: <span th:text="${user.height}">Height</span>
+            Height: <span th:text="${user.height}">Height</span> m
             <br>
-            Current weight: <span th:text="${user.currentWeight}">Current weight</span>
+            Current weight: <span th:text="${user.currentWeight}">Current weight</span> Kg
             <br>
             BMI: <span th:text="${user.currentBMI}">BMI</span>
             <br><br>
-            Healthy maximum weight: <span th:text="${user.healthyMaxWeight}">Healthy maximum</span>
+            Healthy maximum weight: <span th:text="${user.healthyMaxWeight}">Healthy maximum</span> Kg
             <br>
-            Healthy manimum weight: <span th:text="${user.healthyMinWeight}">Healthy manimum</span>
+            Healthy manimum weight: <span th:text="${user.healthyMinWeight}">Healthy manimum</span> Kg
             <br>
-            Weight to lose: <span th:text="${user.weightToLose}">Weight to lose</span>
+            Weight to lose: <span th:text="${user.weightToLose}">Weight to lose</span> Kg
             <br><br>
         </tr>
     </table>
 </div>
+
+
 <h3>Your current data</h3>
 <form method="POST"
       action="/setter" modelAttribute="user">
@@ -43,7 +47,7 @@ Welcome, <span th:text="${#authentication.name}">Name</span>
                 <label path="height">height</label>
             </td>
             <td>
-                <input type="text" th:field="*{user.height}" />
+                <input type="text" th:field="*{user.height}"/>
             </td>
             <td><input type="submit" value="Submit"/></td>
         </tr>
@@ -52,24 +56,48 @@ Welcome, <span th:text="${#authentication.name}">Name</span>
                 <label path="currentWeight">Current weight</label>
             </td>
             <td>
-                <input type="text" th:field="*{user.currentWeight}" />
+                <input type="text" th:field="*{user.currentWeight}"/>
             </td>
             <td><input type="submit" value="Submit"/></td>
         </tr>
     </table>
 </form>
 
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" th:inline="javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Date', 'Weight'],
+
+            /*[# th:each="weight: ${user.weights}"]*/
+            [ [[${#dates.format(new java.util.Date(weight.key))}]], [[${weight.value}]] ],
+            /*[/]*/
+        ]);
+
+        var options = {
+            title: 'Your progress:',
+            hAxis: {title: 'Timeline',  titleTextStyle: {color: '#333'}},
+            vAxis: {minValue: 40}
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
+</script>
+<div id="chart_div" style="width: 100%; height: 500px;"></div>
+
 <h3>History</h3>
 <table>
     <tr th:each="weight : ${user.weights}">
-        <td th:text="${weight.key}">key</td>
-        <td th:text="${weight.value}">value</td>
+        <span th:text="${#dates.format(new java.util.Date(weight.key))}"></span>
+        - <span th:text="${weight.value}">value</span>Kg
+        <br>
     </tr>
 </table>
-
-<form id="logoutForm" method="POST" action="/add">
-    <button type="submit" style="margin-top: 2rem;">Log Out</button>
-</form>
 
 </body>
 </html>
