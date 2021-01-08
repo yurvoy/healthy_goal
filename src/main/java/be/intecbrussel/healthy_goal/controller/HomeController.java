@@ -53,6 +53,18 @@ public class HomeController implements ErrorController {
         return "redirect:/";
     }
 
+    //TODO thymeleaf must returning key object
+    @RequestMapping(value = "/deleteValue", method = RequestMethod.POST)
+    public String deleteValue(Principal principal, Object key, ModelMap modelMap) {
+        User user = authService.extractUserFromAuthInfo(principal);
+
+        user.deleteValueByKey(key);
+
+        userDAO.save(user);
+
+        return "redirect:/";
+    }
+
     @RequestMapping("/error")
     public String handleError() {
         return "customError";

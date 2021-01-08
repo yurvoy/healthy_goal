@@ -112,6 +112,10 @@ public class User{
         weights.put(System.currentTimeMillis(), currentWeight);
     }
 
+    public void deleteValueByKey (Object key) {
+        weights.remove(key);
+    }
+
     public void setProvider(AuthProvider provider) {
         this.provider = provider;
     }
