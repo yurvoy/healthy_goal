@@ -3,8 +3,8 @@ package be.intecbrussel.healthy_goal.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 @Data
 @Entity
@@ -107,7 +107,7 @@ public class User{
             this.weightToLose = 0.0D;
         }
         if (weights == null) {
-            weights = new HashMap<>();
+            weights = new TreeMap<>();
         }
         weights.put(System.currentTimeMillis(), currentWeight);
     }
