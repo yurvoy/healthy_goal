@@ -4,7 +4,7 @@ spring:
       enabled: true
       path: /h2
   datasource:
-    url: jdbc:h2:/home/yvo/IdeaProjects/Healthy-goal/src/main/resources/data/healthy_goal
+    url: jdbc:h2:/home/yvo/IdeaProjects/Healthy-goal-thymeleaf/src/main/resources/data/healthy_goal
     username:
     password:
     driverClassName: org.h2.Driver

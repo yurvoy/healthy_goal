@@ -85,7 +85,7 @@ Welcome, <span th:text="${#authentication.name}">Name</span>
         chart.draw(data, options);
     }
 </script>
-<div id="chart_div" style="width: 100%; height: 500px;"></div>
+<div id="chart_div" style="width: 100%; height: 500px;" th:if="not ${user.weights.isEmpty()}"></div>
 
 <h3>Advies</h3>
 <div id="advies">
@@ -94,7 +94,7 @@ Welcome, <span th:text="${#authentication.name}">Name</span>
 
 <h3>History</h3>
 
-<div>
+<div th:if="not ${user.weights.isEmpty()}">
     <table>
         <form method="POST" action="/deleteValue">
             <tr th:each="weight : ${user.weights}">
@@ -109,6 +109,7 @@ Welcome, <span th:text="${#authentication.name}">Name</span>
 </div>
 
 
+<a th:href="@{/deleteUser/{id}(id=${user.id})}">Delete your account !</a>
 
 </body>
 </html>
