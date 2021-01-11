@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.security.Principal;
 
 @Controller
@@ -21,6 +24,8 @@ public class HomeController implements ErrorController {
     private SocialAuthService authService;
     @Autowired
     private UserDAO userDAO;
+
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
     @RequestMapping(value = "/")
     public String home(Principal principal, Model model) {
@@ -55,8 +60,10 @@ public class HomeController implements ErrorController {
 
     //TODO thymeleaf must returning key object
     @RequestMapping(value = "/deleteValue", method = RequestMethod.POST)
-    public String deleteValue(Principal principal, Object key, ModelMap modelMap) {
+    public String deleteValue(Principal principal, Long key, ModelMap modelMap) {
         User user = authService.extractUserFromAuthInfo(principal);
+
+        logger.info("Removing date {} from user {}", key, user.getId());
 
         user.deleteValueByKey(key);
 

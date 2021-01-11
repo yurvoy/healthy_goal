@@ -112,7 +112,7 @@ public class User{
         weights.put(System.currentTimeMillis(), currentWeight);
     }
 
-    public void deleteValueByKey (Object key) {
+    public void deleteValueByKey (Long key) {
         weights.remove(key);
     }
 
