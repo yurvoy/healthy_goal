@@ -13,7 +13,9 @@ public class Advies {
             "obesity increases your risk of severe illness from COVID-19.",
             "BMI remains a strong independent risk factor for severe COVID-19",
             "the effect of BMI on the immune system is more apparent for women.",
-            "weight loss modulates immune system parameters of patients with virus HCV."
+            "weight loss modulates immune system parameters of patients with virus HCV.",
+            "excess weight creates high blood pressure (Hypertension)",
+            "excess weight creates high LDL cholesterol or high levels of triglycerides (Dyslipidemia)"
     };
 
     public static String getAdvies() {

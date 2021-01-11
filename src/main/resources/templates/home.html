@@ -9,7 +9,7 @@
 <body>
 <h1>HEALTHY GOAL</h1>
 Welcome, <span th:text="${#authentication.name}">Name</span>
-<form id="logoutForm" method="POST" action="/logout">
+<form class="buttonForm" method="POST" action="/logout">
     <button type="submit" style="margin-top: 2rem;">Log Out</button>
 </form>
 <div>
@@ -29,7 +29,7 @@ Welcome, <span th:text="${#authentication.name}">Name</span>
             <br><br>
             Healthy maximum weight: <span th:text="${user.healthyMaxWeight}">Healthy maximum</span> Kg
             <br>
-            Healthy manimum weight: <span th:text="${user.healthyMinWeight}">Healthy manimum</span> Kg
+            Healthy minimum weight: <span th:text="${user.healthyMinWeight}">Healthy manimum</span> Kg
             <br>
             Weight to lose: <span th:text="${user.weightToLose}">Weight to lose</span> Kg
             <br><br>
@@ -55,7 +55,7 @@ Welcome, <span th:text="${#authentication.name}">Name</span>
             <td>
                 <input type="text" th:field="*{user.currentWeight}"/>
             </td>
-            <td><input type="submit" value="Submit"/></td>
+            <td><input type="submit" value="Change"/></td>
         </tr>
     </table>
 </form>
@@ -98,7 +98,8 @@ Welcome, <span th:text="${#authentication.name}">Name</span>
     <table>
         <form method="POST" action="/deleteValue">
             <tr th:each="weight : ${user.weights}">
-                <span th:text="${#dates.format(new java.util.Date(weight.key))}"></span>
+                <span th:text="${weightStat.index}">index</span>
+                - <span th:text="${#dates.format(new java.util.Date(weight.key))}"></span>
                 - <span th:text="${weight.value}">value</span>Kg
                 <input type="hidden" name="key" th:value="${weight.key}"/>
                 <button type="submit">X</button>
@@ -108,8 +109,12 @@ Welcome, <span th:text="${#authentication.name}">Name</span>
     </table>
 </div>
 
+<form class="buttonForm" method="POST" action="/clearData">
+    <button type="submit" style="margin-top: 2rem;">Clear History</button>
+</form>
 
-<a th:href="@{/deleteUser/{id}(id=${user.id})}">Delete your account !</a>
+
+<a th:href="@{/deleteUser/{id}(id=${user.id})}">!!! Delete your account !!!</a>
 
 </body>
 </html>

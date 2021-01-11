@@ -3,8 +3,8 @@ package be.intecbrussel.healthy_goal.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 @Data
 @Entity
@@ -45,6 +45,7 @@ public class User{
     // CONSTRUCTOR
 
     public User() {
+        weights = new TreeMap<>();
     }
 
     public User(String id, String name, String email, AuthProvider provider) {
@@ -52,6 +53,7 @@ public class User{
         this.name = name;
         this.email = email;
         this.provider = provider;
+        weights = new TreeMap<>();
     }
 
 
@@ -86,7 +88,7 @@ public class User{
     }
 
     public Map<Long, Double> getWeights() {
-        return this.weights;
+        return new TreeMap<>(this.weights);
     }
 
     public AuthProvider getProvider() {
@@ -110,10 +112,11 @@ public class User{
         } else {
             this.weightToLose = 0.0D;
         }
-        if (weights == null) {
-            weights = new LinkedHashMap<>();
-        }
         weights.put(System.currentTimeMillis(), currentWeight);
+    }
+
+    public void clearWeights() {
+        weights.clear();
     }
 
     public void deleteValueByKey (Long key) {

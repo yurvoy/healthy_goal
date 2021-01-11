@@ -15,7 +15,7 @@ import java.util.Optional;
 @Service
 public class SocialAuthService {
     private static final String GOOGLE_ID_FIELD_NAME = "sub";
-    private static final String GITHUB_ID_FIELD_NAME = "client_id";
+    private static final String GITHUB_ID_FIELD_NAME = "node_id";
     private static final String AUTH_DETAILS_NAME_PARAM = "name";
     private static final String AUTH_DETAILS_EMAIL_PARAM = "email";
     @Autowired

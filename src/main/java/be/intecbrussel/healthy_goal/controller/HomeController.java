@@ -55,7 +55,7 @@ public class HomeController implements ErrorController {
         return "redirect:/";
     }
 
-    //TODO thymeleaf must returning key object
+    //TODO Fix thymeleaf send always first index
     @RequestMapping(value = "/deleteValue", method = RequestMethod.POST)
     public String deleteValue(Principal principal, Long key, ModelMap modelMap) {
         User user = authService.extractUserFromAuthInfo(principal);
@@ -63,6 +63,17 @@ public class HomeController implements ErrorController {
         logger.info("Removing date {} from user {}", key, user.getId());
 
         user.deleteValueByKey(key);
+
+        userDAO.save(user);
+
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/clearData", method = RequestMethod.POST)
+    public String clearData(Principal principal, ModelMap modelMap) {
+        User user = authService.extractUserFromAuthInfo(principal);
+
+        user.clearWeights();
 
         userDAO.save(user);
 
