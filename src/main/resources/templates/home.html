@@ -96,18 +96,22 @@ Welcome, <span th:text="${#authentication.name}">Name</span>
 
 <div th:if="not ${user.weights.isEmpty()}">
     <table>
-        <form method="POST" action="/deleteValue">
-            <tr th:each="weight : ${user.weights}">
-                <span th:text="${weightStat.index}">index</span>
-                - <span th:text="${#dates.format(new java.util.Date(weight.key))}"></span>
-                - <span th:text="${weight.value}">value</span>Kg
+        <tr th:each="weight : ${user.weights}">
+            <span th:text="${weightStat.index}">index</span>
+            - <span th:text="${#dates.format(new java.util.Date(weight.key))}"></span>
+            - <span th:text="${weight.value}">value</span>Kg
+            <br>
+        </tr>
+        <tr th:each="weight : ${user.weights}">
+            <form method="POST" action="/deleteValue">
                 <input type="hidden" name="key" th:value="${weight.key}"/>
                 <button type="submit">X</button>
                 <br>
-            </tr>
-        </form>
+            </form>
+        </tr>
     </table>
 </div>
+
 
 <form class="buttonForm" method="POST" action="/clearData">
     <button type="submit" style="margin-top: 2rem;">Clear History</button>

@@ -8,7 +8,7 @@ import java.util.TreeMap;
 
 @Data
 @Entity
-public class User{
+public class User {
     @Id
     @Column
     private String id;
@@ -112,15 +112,28 @@ public class User{
         } else {
             this.weightToLose = 0.0D;
         }
-        weights.put(System.currentTimeMillis(), currentWeight);
+        if(this.currentWeight>40D) {
+            weights.put(System.currentTimeMillis(), currentWeight);
+        }
     }
 
     public void clearWeights() {
         weights.clear();
+        setCurrentWeight(0);
     }
 
-    public void deleteValueByKey (Long key) {
+    public void deleteValueByKey(Long key) {
         weights.remove(key);
+        if (!weights.isEmpty()) {
+            long lastKey = 0;
+            for (Map.Entry<Long, Double> entry : weights.entrySet()){
+                lastKey = entry.getKey();
+            }
+            this.currentWeight = weights.get(lastKey);
+            this.currentBMI = this.currentWeight / Math.pow(height, 2.0D);
+        } else {
+            clearWeights();
+        }
     }
 
     public void setProvider(AuthProvider provider) {

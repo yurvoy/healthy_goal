@@ -55,9 +55,8 @@ public class HomeController implements ErrorController {
         return "redirect:/";
     }
 
-    //TODO Fix thymeleaf send always first index
     @RequestMapping(value = "/deleteValue", method = RequestMethod.POST)
-    public String deleteValue(Principal principal, Long key, ModelMap modelMap) {
+    public String deleteValue(Principal principal, Long key) {
         User user = authService.extractUserFromAuthInfo(principal);
 
         logger.info("Removing date {} from user {}", key, user.getId());
@@ -70,7 +69,7 @@ public class HomeController implements ErrorController {
     }
 
     @RequestMapping(value = "/clearData", method = RequestMethod.POST)
-    public String clearData(Principal principal, ModelMap modelMap) {
+    public String clearData(Principal principal) {
         User user = authService.extractUserFromAuthInfo(principal);
 
         user.clearWeights();
@@ -81,7 +80,7 @@ public class HomeController implements ErrorController {
     }
 
     @GetMapping("/deleteUser/{id}")
-    public String deleteUser(Principal principal, @PathVariable("id") String id, ModelMap modelMap) {
+    public String deleteUser(Principal principal, @PathVariable("id") String id) {
         User user = authService.extractUserFromAuthInfo(principal);
 
         userDAO.deleteById(id);
