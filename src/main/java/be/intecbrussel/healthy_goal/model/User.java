@@ -119,7 +119,7 @@ public class User {
 
     public void clearWeights() {
         weights.clear();
-        setCurrentWeight(0);
+        setCurrentWeight(0D);
     }
 
     public void deleteValueByKey(Long key) {
@@ -129,7 +129,7 @@ public class User {
             this.currentWeight = (double) weights.values().toArray()[lastIndex];
             this.currentBMI = this.currentWeight / Math.pow(height, 2.0D);
         } else {
-            clearWeights();
+            setCurrentWeight(0D);
         }
     }
 

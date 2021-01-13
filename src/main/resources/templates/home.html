@@ -7,32 +7,33 @@
     <title>Healthy goal</title>
 </head>
 <body>
+<!--/*@thymesVar id="user" type="java.util.List<be.intecbrussel.healthy_goal.model.User>"*/-->
 <h1>HEALTHY GOAL</h1>
-Welcome, <span th:text="${#authentication.name}">Name</span>
+Welcome, <span th:text="${user.name}">ID</span>
 <form class="buttonForm" method="POST" action="/logout">
     <button type="submit" style="margin-top: 2rem;">Log Out</button>
 </form>
 <div>
-        <tr>
-            Your id: <span th:text="${user.id}">ID</span>
-            <br>
-            Email: <span th:text="${user.email}">Email</span>
-            <br>
-            Provider: <span th:text="${user.provider}">AuthProdider</span>
-            <br><br>
-            Height: <span th:text="${user.height}">Height</span> m
-            <br>
-            Current weight: <span th:text="${user.currentWeight}">Current weight</span> Kg
-            <br>
-            BMI: <span th:text="${user.currentBMI}">BMI</span>
-            <br><br>
-            Healthy maximum weight: <span th:text="${user.healthyMaxWeight}">Healthy maximum</span> Kg
-            <br>
-            Healthy minimum weight: <span th:text="${user.healthyMinWeight}">Healthy manimum</span> Kg
-            <br>
-            Weight to lose: <span th:text="${user.weightToLose}">Weight to lose</span> Kg
-            <br><br>
-        </tr>
+    <tr>
+        Your id: <span th:text="${user.id}">ID</span>
+        <br>
+        Email: <span th:text="${user.email}">Email</span>
+        <br>
+        Provider: <span th:text="${user.provider}">AuthProdider</span>
+        <br><br>
+        Height: <span th:text="${user.height}">Height</span> m
+        <br>
+        Current weight: <span th:text="${user.currentWeight}">Current weight</span> Kg
+        <br>
+        BMI: <span th:text="${user.currentBMI}">BMI</span>
+        <br><br>
+        Healthy maximum weight: <span th:text="${user.healthyMaxWeight}">Healthy maximum</span> Kg
+        <br>
+        Healthy minimum weight: <span th:text="${user.healthyMinWeight}">Healthy manimum</span> Kg
+        <br>
+        Weight to lose: <span th:text="${user.weightToLose}">Weight to lose</span> Kg
+        <br><br>
+    </tr>
 </div>
 
 
@@ -91,23 +92,31 @@ Welcome, <span th:text="${#authentication.name}">Name</span>
 </div>
 
 
-<h3>History</h3>
-
 <div th:if="not ${user.weights.isEmpty()}">
     <table>
-        <tr th:each="weight : ${user.weights}">
-            <span th:text="${weightStat.index}">index</span>
-            - <span th:text="${#dates.format(new java.util.Date(weight.key))}"></span>
-            - <span th:text="${weight.value}">value</span>Kg
-            <br>
+        <thead>
+        <tr>
+            <th>History</th>
+            <th>delete</th>
         </tr>
+        </thead>
+        <tbody>
         <tr th:each="weight : ${user.weights}">
-            <form method="POST" action="/deleteValue">
-                <input type="hidden" name="key" th:value="${weight.key}"/>
-                <button type="submit">X</button>
+            <td>
+                <span th:text="${weightStat.index}">index</span>
+                - <span th:text="${#dates.format(new java.util.Date(weight.key))}"></span>
+                - <span th:text="${weight.value}">value</span>Kg
                 <br>
-            </form>
+            </td>
+            <td>
+                <form method="POST" action="/deleteValue">
+                    <input type="hidden" name="key" th:value="${weight.key}"/>
+                    <button type="submit">X</button>
+                    <br>
+                </form>
+            </td>
         </tr>
+        </tbody>
     </table>
 </div>
 
