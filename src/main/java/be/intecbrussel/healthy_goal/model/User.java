@@ -125,11 +125,8 @@ public class User {
     public void deleteValueByKey(Long key) {
         weights.remove(key);
         if (!weights.isEmpty()) {
-            long lastKey = 0;
-            for (Map.Entry<Long, Double> entry : weights.entrySet()){
-                lastKey = entry.getKey();
-            }
-            this.currentWeight = weights.get(lastKey);
+            int lastIndex = weights.size()-1;
+            this.currentWeight = (double) weights.values().toArray()[lastIndex];
             this.currentBMI = this.currentWeight / Math.pow(height, 2.0D);
         } else {
             clearWeights();

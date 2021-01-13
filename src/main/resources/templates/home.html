@@ -13,7 +13,6 @@ Welcome, <span th:text="${#authentication.name}">Name</span>
     <button type="submit" style="margin-top: 2rem;">Log Out</button>
 </form>
 <div>
-    <table>
         <tr>
             Your id: <span th:text="${user.id}">ID</span>
             <br>
@@ -34,7 +33,6 @@ Welcome, <span th:text="${#authentication.name}">Name</span>
             Weight to lose: <span th:text="${user.weightToLose}">Weight to lose</span> Kg
             <br><br>
         </tr>
-    </table>
 </div>
 
 
@@ -91,6 +89,7 @@ Welcome, <span th:text="${#authentication.name}">Name</span>
 <div id="advies">
     <span th:text="${T(be.intecbrussel.healthy_goal.model.Advies).getAdvies()}">value</span>
 </div>
+
 
 <h3>History</h3>
 
