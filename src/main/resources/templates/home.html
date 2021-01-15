@@ -43,6 +43,9 @@
                         <th>
                             <img th:src="@{/img/bmi.svg}" alt="" width="72" height="72">
                         </th>
+                        <th>
+                            Minimum weight to lose
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -56,27 +59,10 @@
                         <td>
                             <span th:text="${user.currentBMI}">BMI</span>
                         </td>
+                        <td>
+                            <span th:text="${user.weightToLose}">Weight to lose</span> Kg
+                        </td>
                     </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-xs-12" id="data2">
-            <table>
-                <thead>
-                <tr>
-                    <th>Healthy maximum weight</th>
-                    <th>Healthy minimum weight</th>
-                    <th>Weight to lose</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>
-                        <span th:text="${user.healthyMaxWeight}">Healthy maximum</span> Kg
-                    </td>
-                    <td><span th:text="${user.healthyMinWeight}">Healthy manimum</span> Kg</td>
-                    <td><span th:text="${user.weightToLose}">Weight to lose</span> Kg</td>
-                </tr>
                 </tbody>
             </table>
         </div>
@@ -103,17 +89,25 @@
 
         function drawChart() {
             var data = google.visualization.arrayToDataTable([
-                ['Date', 'Weight'],
+                ['Date', 'Your weight', 'Max healthy', 'Min healthy'],
 
                 /*[# th:each="weight: ${user.weights}"]*/
-                [ [[${#dates.format(new java.util.Date(weight.key))}]], [[${weight.value}]] ],
+                [ [[${#dates.format(new java.util.Date(weight.key))}]], [[${weight.value}]],
+                    [[${user.healthyMaxWeight}]], [[${user.healthyMinWeight}]] ],
                 /*[/]*/
             ]);
 
-            var options = {
+                var options = {
                 title: 'Your progress:',
                 hAxis: {title: 'Timeline', titleTextStyle: {color: '#333'}},
-                vAxis: {minValue: 40}
+                vAxis: {
+                    minValue: 40,
+                    viewWindowMode: "explicit",
+                    viewWindow: {
+                        min: 40
+                    },
+                    ticks: [50, 60, 70, 80, 90, 100]
+                }
             };
 
             var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
