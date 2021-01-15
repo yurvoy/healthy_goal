@@ -1,1 +1,25 @@
+.container {
+    text-align: center;
+}
+
+.row {
+    padding-top: 2vh;
+}
+
+#data {
+    background-color:deepskyblue;
+    color: white;
+}
+
+table {
+    width: 70%;
+    margin-left:15%;
+    margin-right:15%;
+    border: 5px transparent;
+    table-layout: fixed;
+}
+
+#advies {
+    font-style: italic;
+}
 
