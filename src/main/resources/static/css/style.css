@@ -1,6 +1,9 @@
 nav {
     background-color: #1F2739;
     color: white;
+    text-align: center;
+    font-size: 1vw;
+    margin-bottom: 1em;
 }
 
 body {
@@ -11,21 +14,21 @@ body {
     text-align: center;
 }
 
-.row {
-    padding-top: 2vh;
-}
-
-#data {
-    color: white;
-}
-
 table {
-    width: 70%;
-    margin-left:15%;
-    margin-right:15%;
+    color: white;
     table-layout: fixed;
     border: thin dot-dash white;
     border-collapse: inherit;
+    width: 70%;
+    margin-left:15%;
+    margin-right:15%;
+}
+
+
+#history {
+    width: 70%;
+    margin-left:15%;
+    margin-right:15%;
 }
 
 .data-table tr:nth-child(odd) {
@@ -54,11 +57,16 @@ footer {
     padding: 0.5em;
 }
 
+.col-sm.contact {
+    padding-top: 0.5em;
+}
+
 a, a:hover, a:visited {
     color: white;
 }
 
 #delete-account {
+    padding-top: 0.3em;
     text-align: right;
 }
 

@@ -14,15 +14,13 @@
 
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">HEALTHY GOAL</a>
-        </div>
-        <ul class="nav navbar-nav">
-            <li>Welcome, <span th:text="${user.name}"></span></li>
-        </ul>
+        <a class="navbar-brand" href="#">
+            <img th:src="@{/img/healthy.svg}" alt="" height="50">
+            HEALTHY GOAL | Welcome <span th:text="${user.name}"></span>
+        </a>
         <ul class="nav navbar-nav navbar-right">
             <li><a th:href="@{/logout}">
-                <img th:src="@{/img/logout.svg}" width="50" height="50">
+                <img th:src="@{/img/logout.svg}" height="40">
             </a></li>
         </ul>
     </div>
@@ -45,7 +43,7 @@
     </div>
 
     <div class="row">
-        <div class="col-xs-12" id="data">
+        <div id="data">
             <table class="data-table">
                 <thead>
                     <tr>
@@ -102,15 +100,19 @@
 
             var options = {
                 title: 'Your progress:',
-                hAxis: {title: 'Timeline', titleTextStyle: {color: '#333'}},
                 vAxis: {
                     minValue: 40,
                     viewWindowMode: "explicit",
                     viewWindow: {
-                        min: 50
+                        min: 55
                     }
                 },
-                isStacked: 'false',
+                chartArea: {
+                    left: "10%",
+                    right: "10%",
+                    height: "80%",
+                    width: "80%"
+                },
                 ticks: [50, 60, 70, 80, 90, 100],
                 series: {
                         0: { color: 'blue' },
@@ -123,42 +125,48 @@
             chart.draw(data, options);
         }
     </script>
-    <div class="row" id="chart_div" style="width: 100%; height: 500px;" th:if="not ${user.weights.isEmpty()}"></div>
+    <div class="row">
+        <div class="row" id="chart_div" style="width: 100%; height: 500px;" th:if="not ${user.weights.isEmpty()}"></div>
+    </div>
 
     <div class="row" id="advies">
-        <span th:text="${T(be.intecbrussel.healthy_goal.model.Advies).getAdvies()}">value</span>
+        <div class="col">
+            <span th:text="${T(be.intecbrussel.healthy_goal.model.Advies).getAdvies()}">value</span>
+        </div>
     </div>
 
 
     <div class="row" th:if="not ${user.weights.isEmpty()}">
-        <table>
-            <thead>
-            <tr>
-                <th>History</th>
-                <th>delete</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="weight : ${user.weights}">
-                <td>
-                    <span th:text="${weightStat.index}">index</span>
-                    - <span th:text="${#dates.format(weight.key, 'dd-MM-yyyy')}"></span>
-                    - <span th:text="${weight.value}">value</span>Kg
-                    <br>
-                </td>
-                <td>
-                    <form method="POST" action="/deleteValue">
-                        <input type="hidden" name="key" th:value="${weight.key}"/>
-                        <button type="submit">X</button>
-                        <br>
-                    </form>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <form class="buttonForm" method="POST" action="/clearData">
-            <button type="submit" style="margin-top: 2rem;">Clear History</button>
-        </form>
+        <div id="history">
+            <table class="data-table">
+                <thead>
+                <tr>
+                    <th>History</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="weight : ${user.weights}">
+                    <td>
+                        <span th:text="${weightStat.index}">index</span>
+                        - <span th:text="${#dates.format(weight.key)}"></span>
+                        - <span th:text="${weight.value}">value</span>Kg
+                        <form method="POST" action="/deleteValue">
+                            <input type="hidden" name="key" th:value="${weight.key}"/>
+                            <button type="submit" class="btn btn-light">X</button>
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <form class="buttonForm" method="POST" action="/clearData">
+                            <button type="submit" class="btn btn-light">Delete all history</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
     </div>
 
 </div>
@@ -167,10 +175,10 @@
 <footer>
     <div class="container">
         <div class="row">
-            <div class="col-sm">
+            <div class="col-sm contact">
                 <p>Contact: <a href="mailto:yvonnick.urvoy@gmail.com">yvonnick.urvoy@gmail.com</a></p>
             </div>
-            <div class="col-sm" id="delete-account">
+            <div class="col-sm delete" id="delete-account">
                 <form th:action="@{/deleteUser/{id}(id=${user.id})}">
                     <button type="submit" value="Submit" class="btn btn-danger">Delete account</button>
                 </form>

@@ -120,6 +120,7 @@ public class User {
     public void clearWeights() {
         weights.clear();
         setCurrentWeight(0D);
+        setHeight(0D);
     }
 
     public void deleteValueByKey(Long key) {
