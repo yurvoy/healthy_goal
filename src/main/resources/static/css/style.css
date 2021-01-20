@@ -1,3 +1,12 @@
+nav {
+    background-color: #1F2739;
+    color: white;
+}
+
+body {
+    color: #1F2739;
+}
+
 .container {
     text-align: center;
 }
@@ -7,7 +16,6 @@
 }
 
 #data {
-    background-color:deepskyblue;
     color: white;
 }
 
@@ -15,11 +23,42 @@ table {
     width: 70%;
     margin-left:15%;
     margin-right:15%;
-    border: 5px transparent;
     table-layout: fixed;
+    border: thin dot-dash white;
+    border-collapse: inherit;
+}
+
+.data-table tr:nth-child(odd) {
+    background-color: #323C50;
+}
+
+.data-table tr:nth-child(even) {
+    background-color: #2C3446;
+}
+
+.data-table th {
+    background-color: #1F2739;
+    padding: 1em;
+}
+.data-table td {
+    padding: 0.5em;
 }
 
 #advies {
     font-style: italic;
+}
+
+footer {
+    color: white;
+    background-color: #1F2739;
+    padding: 0.5em;
+}
+
+a, a:hover, a:visited {
+    color: white;
+}
+
+#delete-account {
+    text-align: right;
 }
 
