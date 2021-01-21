@@ -36,8 +36,8 @@
                 <input type="text" size="5%" th:field="*{user.height}"/>
                 <label>Weight</label>
                 <input type="text" size="5%" th:field="*{user.currentWeight}"/>
-                <button type="submit" th:if="${user.weights.isEmpty()}">Enter your characteristics</button>
-                <button type="submit" th:if="not ${user.weights.isEmpty()}">Change your characteristics</button>
+                <button type="submit" class="btn btn-dark" th:if="${user.weights.isEmpty()}">Enter your characteristics</button>
+                <button type="submit" class="btn btn-dark" th:if="not ${user.weights.isEmpty()}">Change your characteristics</button>
             </div>
         </form>
     </div>
@@ -180,7 +180,7 @@
             </div>
             <div class="col-sm delete" id="delete-account">
                 <form th:action="@{/deleteUser/{id}(id=${user.id})}">
-                    <button type="submit" value="Submit" class="btn btn-danger">Delete account</button>
+                    <button type="submit" value="Submit" class="btn btn-danger">⚠ Delete account ⚠</button>
                 </form>
             </div>
         </div>

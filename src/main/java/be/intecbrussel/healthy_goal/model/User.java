@@ -131,6 +131,7 @@ public class User {
             this.currentBMI = this.currentWeight / Math.pow(height, 2.0D);
         } else {
             setCurrentWeight(0D);
+            setHeight(0D);
         }
     }
 
