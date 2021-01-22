@@ -59,6 +59,7 @@ footer {
 
 .col-sm.contact {
     padding-top: 0.5em;
+    text-align: left;
 }
 
 a, a:hover, a:visited {
