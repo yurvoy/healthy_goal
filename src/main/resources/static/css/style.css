@@ -25,12 +25,6 @@ table {
 }
 
 
-#history {
-    width: 70%;
-    margin-left:15%;
-    margin-right:15%;
-}
-
 .data-table tr:nth-child(odd) {
     background-color: #323C50;
 }
@@ -48,7 +42,15 @@ table {
 }
 
 #advies {
+    padding-top: 1em;
     font-style: italic;
+}
+
+#history {
+    padding-top: 2em;
+    line-height: 3em;
+    padding-bottom: 2em;
+    text-decoration-line: underline;
 }
 
 footer {
