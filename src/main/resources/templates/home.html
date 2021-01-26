@@ -37,8 +37,8 @@
                 <input type="text" size="5%" th:field="*{user.height}"/>
                 <label>Weight</label>
                 <input type="text" size="5%" th:field="*{user.currentWeight}"/>
-                <button type="submit" class="btn btn-dark" th:if="${user.weights.isEmpty()}">Enter your characteristics</button>
-                <button type="submit" class="btn btn-dark" th:if="not ${user.weights.isEmpty()}">Change your characteristics</button>
+                <button type="submit" class="btn btn-primary" th:if="${user.weights.isEmpty()}">Enter your characteristics</button>
+                <button type="submit" class="btn btn-primary" th:if="not ${user.weights.isEmpty()}">Change your characteristics</button>
             </div>
         </form>
     </div>

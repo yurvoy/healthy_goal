@@ -7,7 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -41,7 +40,7 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/setter", method = RequestMethod.POST)
-    public String setter(Principal principal, @ModelAttribute("user") User userForm, ModelMap modelMap) {
+    public String setter(Principal principal, @ModelAttribute("user") User userForm) {
         User user = authService.extractUserFromAuthInfo(principal);
 
         user.setHeight(userForm.getHeight());

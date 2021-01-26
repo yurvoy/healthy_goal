@@ -73,3 +73,6 @@ a, a:hover, a:visited {
     text-align: right;
 }
 
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: #1F2739;
+}
