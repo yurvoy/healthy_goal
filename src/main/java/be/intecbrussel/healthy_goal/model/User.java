@@ -59,40 +59,16 @@ public class User {
 
     // GETTERS
 
-    public String getEmail() {
-        return email;
-    }
-
     public double getHeight() {
         return this.height;
-    }
-
-    public double getCurrentBMI() {
-        return this.currentBMI;
     }
 
     public double getCurrentWeight() {
         return this.currentWeight;
     }
 
-    public double getHealthyMaxWeight() {
-        return this.healthyMaxWeight;
-    }
-
-    public double getHealthyMinWeight() {
-        return this.healthyMinWeight;
-    }
-
-    public double getWeightToLose() {
-        return this.weightToLose;
-    }
-
     public Map<Long, Double> getWeights() {
         return new TreeMap<>(this.weights);
-    }
-
-    public AuthProvider getProvider() {
-        return provider;
     }
 
 
@@ -125,17 +101,17 @@ public class User {
 
     public void deleteValueByKey(Long key) {
         weights.remove(key);
+    }
+
+    public void setLastAddedValue() {
         if (!weights.isEmpty()) {
             int lastIndex = weights.size()-1;
-            this.currentWeight = (double) weights.values().toArray()[lastIndex];
-            this.currentBMI = this.currentWeight / Math.pow(height, 2.0D);
+            System.out.println(weights.values().toArray()[lastIndex]);
+            currentWeight = (double) weights.values().toArray()[lastIndex];
+            currentBMI = currentWeight / Math.pow(height, 2.0D);
         } else {
             setCurrentWeight(0D);
             setHeight(0D);
         }
-    }
-
-    public void setProvider(AuthProvider provider) {
-        this.provider = provider;
     }
 }

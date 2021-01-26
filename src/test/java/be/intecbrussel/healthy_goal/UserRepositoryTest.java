@@ -20,11 +20,15 @@ public class UserRepositoryTest {
         userDao.save(user);
 
         //Remove Map data test
-        user.getWeights().put(123456L, 12.0);
-        user.getWeights().put(123457L, 13.0);
+        user.setHeight(1.76);
+        user.getWeights().put(123456L, 75.0);
+        user.getWeights().put(123457L, 71.0);
         userDao.save(user);
         user.getWeights().remove(123457L);
         userDao.save(user);
+        user.setLastAddedValue();
+        userDao.save(user);
     }
+
 
 }

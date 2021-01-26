@@ -3,8 +3,7 @@ package be.intecbrussel.healthy_goal.controller;
 import be.intecbrussel.healthy_goal.dao.UserDAO;
 import be.intecbrussel.healthy_goal.model.User;
 import be.intecbrussel.healthy_goal.service.SocialAuthService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
+@Slf4j
 @Controller
 public class HomeController {
 
@@ -20,8 +20,6 @@ public class HomeController {
     private SocialAuthService authService;
     @Autowired
     private UserDAO userDAO;
-
-    private Logger logger = LoggerFactory.getLogger(getClass());
 
     @RequestMapping(value = "/")
     public String home(Principal principal, Model model) {
@@ -58,10 +56,10 @@ public class HomeController {
     public String deleteValue(Principal principal, Long key) {
         User user = authService.extractUserFromAuthInfo(principal);
 
-        logger.info("Removing date {} from user {}", key, user.getId());
+        log.info("Removing date {} from user {}", key, user.getId());
 
         user.deleteValueByKey(key);
-
+        user.setLastAddedValue();
         userDAO.save(user);
 
         return "redirect:/";
