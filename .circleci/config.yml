@@ -11,6 +11,9 @@ jobs:
     # A list of available CircleCI docker Convenience Images are available here: https://circleci.com/developer/images/image/cimg/openjdk
     docker:
       - image: cimg/openjdk:11.0
+        auth:
+          username: github/yurvoy
+          password: Bitch4269
     steps:
       # Checkout the code as the first step.
       - checkout
