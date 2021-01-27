@@ -12,7 +12,7 @@ jobs:
     docker:
       - image: cimg/openjdk:11.0
         auth:
-          username: github/yurvoy
+          username: yurvoy
           password: Bitch4269
     steps:
       # Checkout the code as the first step.
