@@ -68,3 +68,21 @@ github:
     scope: user:email read:user
   resource:
     userInfoUri:  https://api.github.com/user
+
+
+Procfile:
+web: java -jar target/healthy_goal-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod
+
+profiles: prod
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:8080/db
+    username: postgres
+    password: postgres
+  # JPA properties
+  jpa:
+    hibernate.ddl-auto: update
+    generate-ddl: false
+    show-sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect

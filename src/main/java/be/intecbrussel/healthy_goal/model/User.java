@@ -3,6 +3,7 @@ package be.intecbrussel.healthy_goal.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -105,9 +106,8 @@ public class User {
 
     public void setLastAddedValue() {
         if (!weights.isEmpty()) {
-            int lastIndex = weights.size()-1;
-            System.out.println(weights.values().toArray()[lastIndex]);
-            currentWeight = (double) weights.values().toArray()[lastIndex];
+            long lastTimestamp = Collections.max(weights.keySet());
+            currentWeight = weights.get(lastTimestamp);
             currentBMI = currentWeight / Math.pow(height, 2.0D);
         } else {
             setCurrentWeight(0D);
