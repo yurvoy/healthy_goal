@@ -14,6 +14,10 @@ body {
     text-align: center;
 }
 
+input {
+    width: 6%;
+}
+
 table {
     color: white;
     table-layout: fixed;
@@ -23,7 +27,6 @@ table {
     margin-left:15%;
     margin-right:15%;
 }
-
 
 .data-table tr {
     background-color: #323C50;
@@ -44,9 +47,8 @@ table {
 
 #history {
     padding-top: 2em;
-    line-height: 3em;
     padding-bottom: 2em;
-    text-decoration-line: blink;
+    line-height: 2em;
 }
 
 footer {
