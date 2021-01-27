@@ -25,12 +25,8 @@ table {
 }
 
 
-.data-table tr:nth-child(odd) {
+.data-table tr {
     background-color: #323C50;
-}
-
-.data-table tr:nth-child(even) {
-    background-color: #2C3446;
 }
 
 .data-table th {
@@ -50,7 +46,7 @@ table {
     padding-top: 2em;
     line-height: 3em;
     padding-bottom: 2em;
-    text-decoration-line: underline;
+    text-decoration-line: blink;
 }
 
 footer {

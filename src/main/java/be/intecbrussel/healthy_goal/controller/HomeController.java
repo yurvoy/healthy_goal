@@ -59,6 +59,8 @@ public class HomeController {
 
         user.deleteValueByKey(key);
         user.setLastAddedValue();
+
+        log.debug("test");
         userDAO.save(user);
 
         return "redirect:/";
