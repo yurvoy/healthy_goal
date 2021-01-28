@@ -72,7 +72,7 @@ github:
 
 
 Procfile:
-web: java $JAVA_OPTS -jar target/healthy_goal-0.0.1-SNAPSHOT.jar --port $PORT target/*.war --spring.profiles.active=prod
+web: java -jar target/healthy_goal-0.0.1-SNAPSHOT.jar --port $PORT target/*.war --spring.profiles.active=prod
 
 ---
 
