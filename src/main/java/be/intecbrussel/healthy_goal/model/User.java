@@ -81,7 +81,7 @@ public class User {
 
     public void setCurrentWeight(double currentWeight) {
         this.currentWeight = currentWeight;
-        this.currentBMI = this.currentWeight / Math.pow(height, 2.0D);
+        this.currentBMI = currentWeight / Math.pow(height, 2.0D);
         this.healthyMaxWeight = 25.0D * Math.pow(height, 2.0D);
         this.healthyMinWeight = 18.5D * Math.pow(height, 2.0D);
         if (this.currentBMI > 25.0D) {
