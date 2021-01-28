@@ -137,7 +137,7 @@
     </div>
 
 
-    <div class="row" id="history" th:if="not ${user.weights.isEmpty()}">
+    <div class="row justify-content-md-center" id="history" th:if="not ${user.weights.isEmpty()}">
         <div class="row border-bottom">
             <div class="col-10">
                 <strong>HISTORY</strong>
@@ -161,9 +161,11 @@
             </div>
         </tr>
         <div class="row">
-            <form method="POST" action="/clearData">
-                <button type="submit" class="btn btn-primary">Delete all history</button>
-            </form>
+            <div class="col-10">
+                <form method="POST" action="/clearData">
+                    <button type="submit" class="btn btn-primary btn-sm">Delete all history</button>
+                </form>
+            </div>
         </div>
 
     </div>
