@@ -33,10 +33,10 @@
     <div class="row">
         <form method="POST" action="/setter" modelAttribute="user">
             <div class="form-inline">
-                <label class="btn btn-primary">Height </label>
-                <input class="btn btn-outline-primary" type="text" th:field="*{user.height}"/>
-                <label class="btn btn-primary">Weight</label>
-                <input class="btn btn-outline-primary" type="text" th:field="*{user.currentWeight}"/>
+                <label>Height </label>
+                <input type="text" th:field="*{user.height}"/>
+                <label>Weight</label>
+                <input type="text" th:field="*{user.currentWeight}"/>
                 <button type="submit" class="btn btn-primary" th:if="${user.weights.isEmpty()}">Enter your characteristics</button>
                 <button type="submit" class="btn btn-primary" th:if="not ${user.weights.isEmpty()}">Change your characteristics</button>
             </div>
@@ -136,35 +136,36 @@
         </div>
     </div>
 
-    <div class="row justify-content-md-center" id="history" th:if="not ${user.weights.isEmpty()}">
-        <div class="col-auto">
-            <div class="border-bottom">
+
+    <div class="row" id="history" th:if="not ${user.weights.isEmpty()}">
+        <div class="row border-bottom">
+            <div class="col-10">
                 <strong>HISTORY</strong>
             </div>
-            <tr th:each="weight : ${user.weights}">
-                <div class="border-bottom">
-                <span th:text="${weightStat.index}">index</span>
-                - <span th:text="${#dates.format(weight.key)}"></span>
-                - <span th:text="${weight.value}">value</span>Kg
-                </div>
-            </tr>
-            <div>
-                <form class="buttonForm" method="POST" action="/clearData">
-                    <button type="submit" class="btn btn-primary">Delete all history</button>
-                </form>
+            <div class="col-2">
+                Delete
             </div>
         </div>
-        <div class="col-auto">
-            <div>Delete</div>
-            <tr th:each="weight : ${user.weights}">
-                <div>
-                <form method="POST" action="/deleteValue">
-                    <input type="hidden" name="key" th:value="${weight.key}"/>
-                    <button type="submit" class="btn btn-primary btn-sm">X</button>
-                </form>
+        <tr th:each="weight : ${user.weights}">
+            <div class="row border-bottom">
+                <div class="col-10">
+                        <span th:text="${weightStat.index}">index</span>
+                        - <span th:text="${#dates.format(weight.key)}"></span>
+                        - <span th:text="${weight.value}">value</span>Kg
                 </div>
-            </tr>
+                <div class="col-2">
+                    <form class="buttonForm" method="POST" action="/deleteValue">
+                        <button type="submit" class="btn btn-primary btn-sm">X</button>
+                    </form>
+                </div>
+            </div>
+        </tr>
+        <div class="row">
+            <form method="POST" action="/clearData">
+                <button type="submit" class="btn btn-primary">Delete all history</button>
+            </form>
         </div>
+
     </div>
 
 </div>
