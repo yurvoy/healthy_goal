@@ -70,12 +70,9 @@ github:
   resource:
     userInfoUri:  https://api.github.com/user
 
-
-Procfile:
-web: java -jar target/healthy_goal-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod
-
 ---
 
+spring:
   profiles: prod
   datasource:
     driver-class-name: org.postgresql.Driver
