@@ -4,12 +4,12 @@ spring:
       enabled: true
       path: /h2
   datasource:
-    url: jdbc:h2:/home/yvo/IdeaProjects/Healthy-goal-thymeleaf/src/main/resources/data/healthy_goal
+    url: jdbc:h2:/home/yvo/IdeaProjects/Healthy-goal/src/main/resources/data/healthy_goal
     username:
     password:
     driverClassName: org.h2.Driver
   jpa:
-    hibernate.ddl-auto: update
+    hibernate.ddl-auto: create
     generate-ddl: false
     show-sql: true
     properties:
@@ -20,8 +20,6 @@ spring:
 
 server:
   port: 8080
-  ssl:
-    enabled: false
 
 security:
   basic:
@@ -76,23 +74,13 @@ spring:
     url: jdbc:postgresql://ec2-34-252-98-12.eu-west-1.compute.amazonaws.com:5432/ddcp8qejhsdnjm
     username: kssckntxuolucf
     password: 5c7c47918838b93a06c2cf4e3bc8a59394c179cb00c868d97c942904eeed08e3
-
   jpa:
     hibernate.ddl-auto: update
     generate-ddl: false
     show-sql: true
     properties:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
   config:
     activate:
       on-profile: prod
-
-security:
-  basic:
-    enabled: false
-  oauth2:
-    client:
-      preEstablishedRedirectUri: https://sheltered-ridge-70126.herokuapp.com/
-
