@@ -38,7 +38,7 @@ public class User {
     @Column(name = "to_lose")
     private double weightToLose;
     @ElementCollection
-    @CollectionTable(name = "user_timeline", joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")})
+    @CollectionTable(name = "users_timeline", joinColumns = {@JoinColumn(name = "users_id", referencedColumnName = "id")})
     @MapKeyColumn(name = "date")
     @Column(name = "weight")
     private Map<Long, Double> weights;
