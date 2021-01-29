@@ -67,15 +67,18 @@ github:
 
 spring:
   profiles: prod
+  h2:
+    console:
+      enabled: false
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://ec2-34-252-98-12.eu-west-1.compute.amazonaws.com:5432/ddcp8qejhsdnjm
     username: kssckntxuolucf
     password: 5c7c47918838b93a06c2cf4e3bc8a59394c179cb00c868d97c942904eeed08e3
-      # JPA properties
   jpa:
     hibernate.ddl-auto: update
     generate-ddl: false
     show-sql: true
-    database: postgresql
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect

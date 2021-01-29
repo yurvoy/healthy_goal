@@ -9,6 +9,7 @@ import java.util.TreeMap;
 
 @Data
 @Entity
+@Table(name = "users")
 public class User {
     @Id
     @Column
