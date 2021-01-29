@@ -43,44 +43,34 @@
         </form>
     </div>
 
-    <div class="row">
-        <div id="data">
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>
-                            <img th:src="@{/img/height.svg}" alt="" width="72" height="72">
-                        </th>
-                        <th>
-                            <img th:src="@{/img/weight.svg}" alt="" width="72" height="72">
-                        </th>
-                        <th>
-                            <img th:src="@{/img/bmi.svg}" alt="" width="72" height="72">
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <span th:text="${user.height}">Height</span> m
-                        </td>
-                        <td>
-                            <span th:text="${user.currentWeight}">Current weight</span> Kg
-                        </td>
-                        <td>
-                            <span th:text="${#numbers.formatDecimal(user.currentBMI, 0, 'COMMA', 2, 'POINT')}">BMI</span>
-                        </td>
-                    </tr>
-                    <tr th:if="not ${user.weightToLose == 0}">
-                        <td></td>
-                        <td>
-                            Minimum weight to lose:
-                            <span th:text="${#numbers.formatDecimal(user.weightToLose, 0, 'COMMA', 2, 'POINT')}">Weight to lose</span> Kg
-                        </td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
+    <div class="row justify-content-md-center" id="monitor">
+        <div class="col-4">
+            <div>
+                <img th:src="@{/img/height.svg}" alt="" width="72" height="72">
+            </div>
+            <div>
+                <span th:text="${user.height}">Height</span> m
+            </div>
+        </div>
+        <div class="col-4">
+            <div>
+                <img th:src="@{/img/weight.svg}" alt="" width="72" height="72">
+            </div>
+            <div>
+                <span th:text="${user.currentWeight}">Current weight</span> Kg
+            </div>
+            <div th:if="not ${user.weightToLose == 0}">
+                Minimum weight to lose:
+                <span th:text="${#numbers.formatDecimal(user.weightToLose, 0, 'COMMA', 2, 'POINT')}">Weight to lose</span> Kg
+            </div>
+        </div>
+        <div class="col-4">
+            <div>
+                <img th:src="@{/img/bmi.svg}" alt="" width="72" height="72">
+            </div>
+            <div>
+                <span th:text="${#numbers.formatDecimal(user.currentBMI, 0, 'COMMA', 2, 'POINT')}">BMI</span>
+            </div>
         </div>
     </div>
 
@@ -105,14 +95,14 @@
                     minValue: 40,
                     viewWindowMode: "explicit",
                     viewWindow: {
-                        min: 55
+                        min: 50
                     }
                 },
                 chartArea: {
-                    left: "10%",
-                    right: "10%",
+                    left: "12%",
+                    right: "12%",
                     height: "80%",
-                    width: "80%"
+                    width: "90%"
                 },
                 ticks: [50, 60, 70, 80, 90, 100],
                 series: {
@@ -135,7 +125,6 @@
             <span th:text="${T(be.intecbrussel.healthy_goal.model.Advies).getAdvies()}">value</span>
         </div>
     </div>
-
 
     <div class="row justify-content-md-center" id="history" th:if="not ${user.weights.isEmpty()}">
         <div class="row border-bottom">

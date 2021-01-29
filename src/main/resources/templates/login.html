@@ -17,8 +17,33 @@
             align-items: center;
         }
 
-        .container {
-            width: 30%;
+        @media only screen
+        and (min-width : 320px) {
+            .container {
+                width: 90%;
+            }
+        }
+
+        @media only screen
+        and (min-width : 768px) {
+            .container {
+                width: 55%;
+            }
+        }
+
+        @media only screen
+        and (min-width : 1200px) {
+            .container {
+                width: 40%;
+                text-align: center;
+            }
+        }
+
+        @media only screen
+        and (min-width : 1600px) {
+            .container {
+                width: 27%;
+            }
         }
     </style>
 </head>

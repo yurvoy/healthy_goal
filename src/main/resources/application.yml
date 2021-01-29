@@ -71,9 +71,9 @@ spring:
       enabled: false
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://ec2-34-252-98-12.eu-west-1.compute.amazonaws.com:5432/ddcp8qejhsdnjm
-    username: kssckntxuolucf
-    password: 5c7c47918838b93a06c2cf4e3bc8a59394c179cb00c868d97c942904eeed08e3
+    url: jdbc:postgresql://ec2-54-216-155-253.eu-west-1.compute.amazonaws.com:5432/d9umfjreut4khd
+    username: myaadgasidbyhn
+    password: 369c68188a2dee927a97ac664260edda51cdfa8652be6448e9340c6535adb8cd
   jpa:
     hibernate.ddl-auto: update
     generate-ddl: false
