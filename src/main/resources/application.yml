@@ -32,7 +32,7 @@ security:
     enabled: false
   oauth2:
     client:
-      preEstablishedRedirectUri: https://localhost:8080/
+      preEstablishedRedirectUri: http://localhost:8443/
 
 
 facebook:
