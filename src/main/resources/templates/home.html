@@ -60,10 +60,7 @@
             <div>
                 <img th:src="@{/img/bmi.svg}" alt="" width="72" height="72">
             </div>
-            <div class="bg-danger" th:if="not ${user.currentBMI <= 25 && user.currentBMI >= 18.5}">
-                <span th:text="${#numbers.formatDecimal(user.currentBMI, 0, 'COMMA', 2, 'POINT')}">BMI</span>
-            </div>
-            <div class="bg-success" th:if="${user.currentBMI <= 25 && user.currentBMI >= 18.5}">
+            <div th:if="${user.currentBMI <= 25 && user.currentBMI >= 18.5}">
                 <span th:text="${#numbers.formatDecimal(user.currentBMI, 0, 'COMMA', 2, 'POINT')}">BMI</span>
             </div>
             <div class="bg-danger" th:if="${user.currentBMI > 25}">
