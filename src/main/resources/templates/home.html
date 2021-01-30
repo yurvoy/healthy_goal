@@ -96,7 +96,7 @@
 
         function drawChart() {
             var data = google.visualization.arrayToDataTable([
-                ['Date', 'Your weight', 'Max healthy', 'Min healthy'],
+                ['Date', 'Your weight', 'Healthy max', 'Healthy min'],
 
                 /*[# th:each="weight: ${user.weights}"]*/
                 [ [[${#dates.format(weight.key, 'dd-MM-yyyy')}]], [[${weight.value}]],
@@ -105,7 +105,6 @@
             ]);
 
             var options = {
-                title: 'Your progress:',
                 vAxis: {
                     minValue: 40,
                     viewWindowMode: "explicit",
