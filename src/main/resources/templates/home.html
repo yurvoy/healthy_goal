@@ -51,6 +51,32 @@
             <div>
                 <span th:text="${user.height}">Height</span> m
             </div>
+            <div class="thinDiv">
+                Healthy min weight:
+                <span th:text="${#numbers.formatDecimal(user.healthyMinWeight, 0, 'COMMA', 2, 'POINT')}"></span> Kg
+            </div>
+        </div>
+        <div class="col-4">
+            <div>
+                <img th:src="@{/img/bmi.svg}" alt="" width="72" height="72">
+            </div>
+            <div class="bg-danger" th:if="not ${user.currentBMI <= 25 && user.currentBMI >= 18.5}">
+                <span th:text="${#numbers.formatDecimal(user.currentBMI, 0, 'COMMA', 2, 'POINT')}">BMI</span>
+            </div>
+            <div class="bg-success" th:if="${user.currentBMI <= 25 && user.currentBMI >= 18.5}">
+                <span th:text="${#numbers.formatDecimal(user.currentBMI, 0, 'COMMA', 2, 'POINT')}">BMI</span>
+            </div>
+            <div class="bg-danger" th:if="${user.currentBMI > 25}">
+                Minimum to lose:
+                <span th:text="${#numbers.formatDecimal(user.weightToLose, 0, 'COMMA', 2, 'POINT')}"></span> Kg
+            </div>
+            <div class="bg-success" th:if="${user.currentBMI <= 25 && user.currentBMI >= 18.5}">
+                You have an healthy BMI
+            </div>
+            <div class="bg-danger" th:if="${user.currentBMI < 18.5}">
+                Minimum to take:
+                <span th:text="${#numbers.formatDecimal(user.weightToLose, 0, 'COMMA', 2, 'POINT')}"></span> Kg
+            </div>
         </div>
         <div class="col-4">
             <div>
@@ -59,17 +85,9 @@
             <div>
                 <span th:text="${user.currentWeight}">Current weight</span> Kg
             </div>
-            <div th:if="not ${user.weightToLose == 0}">
-                Minimum weight to lose:
-                <span th:text="${#numbers.formatDecimal(user.weightToLose, 0, 'COMMA', 2, 'POINT')}">Weight to lose</span> Kg
-            </div>
-        </div>
-        <div class="col-4">
-            <div>
-                <img th:src="@{/img/bmi.svg}" alt="" width="72" height="72">
-            </div>
-            <div>
-                <span th:text="${#numbers.formatDecimal(user.currentBMI, 0, 'COMMA', 2, 'POINT')}">BMI</span>
+            <div class="fatDiv">
+                Healthy max weight:
+                <span th:text="${#numbers.formatDecimal(user.healthyMaxWeight, 0, 'COMMA', 2, 'POINT')}"></span> Kg
             </div>
         </div>
     </div>
@@ -106,9 +124,9 @@
                 },
                 ticks: [50, 60, 70, 80, 90, 100],
                 series: {
-                        0: { color: 'blue' },
-                        1: { color: 'green' },
-                        2: { color: 'red' },
+                        0: { color: '#28a745' },
+                        1: { color: '#8B008B' },
+                        2: { color: '#FF8C00' },
                 }
             };
 

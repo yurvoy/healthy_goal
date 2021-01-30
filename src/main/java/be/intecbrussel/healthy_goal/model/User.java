@@ -36,7 +36,7 @@ public class User {
     @Column(name = "healthy_min")
     private double healthyMinWeight;
     @Column(name = "to_lose")
-    private double weightToLose;
+    private double weightToLose; // "ToTake" if user have a too low BMI
     @ElementCollection
     @CollectionTable(name = "users_timeline", joinColumns = {@JoinColumn(name = "users_id", referencedColumnName = "id")})
     @MapKeyColumn(name = "date")
@@ -82,16 +82,22 @@ public class User {
 
     public void setCurrentWeight(double currentWeight) {
         this.currentWeight = currentWeight;
-        this.currentBMI = currentWeight / Math.pow(height, 2.0D);
         this.healthyMaxWeight = 25.0D * Math.pow(height, 2.0D);
         this.healthyMinWeight = 18.5D * Math.pow(height, 2.0D);
-        if (this.currentBMI > 25.0D) {
-            this.weightToLose = this.currentWeight - this.healthyMaxWeight;
-        } else {
-            this.weightToLose = 0.0D;
-        }
+        setBMI();
         if(this.currentWeight>40D) {
             weights.put(System.currentTimeMillis(), currentWeight);
+        }
+    }
+
+    public void setBMI () {
+        this.currentBMI = currentWeight / Math.pow(height, 2.0D);
+        if (this.currentBMI > 25.0D) {
+            this.weightToLose = this.currentWeight - this.healthyMaxWeight;
+        } else if (this.currentBMI < 18.5D) {
+            this.weightToLose = this.healthyMinWeight - this.currentWeight;
+        } else {
+            this.weightToLose = 0.0D;
         }
     }
 
@@ -109,7 +115,7 @@ public class User {
         if (!weights.isEmpty()) {
             long lastTimestamp = Collections.max(weights.keySet());
             currentWeight = weights.get(lastTimestamp);
-            currentBMI = currentWeight / Math.pow(height, 2.0D);
+            setBMI();
         } else {
             setCurrentWeight(0D);
             setHeight(0D);

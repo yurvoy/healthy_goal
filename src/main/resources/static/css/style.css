@@ -68,7 +68,16 @@ label {
 
 #monitor div div {
     padding: 1em;
+    margin-inside: 1em;
     outline: 1px solid white;
+}
+
+.fatDiv {
+    background-color: #8B008B;
+}
+
+.thinDiv {
+    background-color: #FF8C00;
 }
 
 #advies {
