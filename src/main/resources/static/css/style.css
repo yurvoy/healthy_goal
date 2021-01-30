@@ -72,6 +72,10 @@ label {
     outline: 1px solid white;
 }
 
+.currentDiv {
+    background-color: #323C50;
+}
+
 .fatDiv {
     background-color: #8B008B;
 }
