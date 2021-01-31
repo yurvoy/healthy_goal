@@ -5,6 +5,7 @@ import be.intecbrussel.healthy_goal.model.User;
 import be.intecbrussel.healthy_goal.service.SocialAuthService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,7 @@ import java.security.Principal;
 
 @Slf4j
 @Controller
-public class HomeController {
+public class HomeController implements ErrorController {
 
     @Autowired
     private SocialAuthService authService;
@@ -83,5 +84,15 @@ public class HomeController {
         userDAO.deleteById(id);
 
         return "login";
+    }
+
+    @RequestMapping("/error")
+    public String handleError() {
+        return "redirect:/";
+    }
+
+    @Override
+    public String getErrorPath() {
+        return null;
     }
 }

@@ -28,7 +28,7 @@ input {
     white-space: nowrap;
     vertical-align: middle;
     padding: .375rem .75rem;
-    font-size: 1rem;
+    font-size: 1.1rem;
     line-height: 1.5;
     border-radius: .25rem;
     margin: 2px;
@@ -49,17 +49,18 @@ label {
     white-space: nowrap;
     vertical-align: middle;
     padding: .375rem .75rem;
-    font-size: 1rem;
+    font-size: 1.1rem;
     line-height: 1.5;
     border-radius: .25rem;
     margin: 2px;
-    width: 5em;
+    width: auto;
 }
 
 #monitor {
     alignment: center;
     background-color: #1F2739;
     color: white;
+    border-radius: .25rem;
 }
 
 #monitor .col-4 {
@@ -108,7 +109,7 @@ footer {
 }
 
 .col-sm.contact {
-    padding-top: 0.5em;
+    padding-top: 0.6em;
     text-align: left;
 }
 
@@ -124,6 +125,7 @@ a, a:hover, a:visited {
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
     background-color: #1F2739;
     border-color: #1F2739;
+    font-size: 1.1rem;
 }
 
 @media only screen

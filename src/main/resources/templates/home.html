@@ -33,9 +33,9 @@
     <div class="row">
         <form method="POST" action="/setter" modelAttribute="user">
             <div class="form-inline">
-                <label>Height </label>
+                <label>Height (m)</label>
                 <input type="text" th:field="*{user.height}"/>
-                <label>Weight</label>
+                <label>Weight (kg)</label>
                 <input type="text" th:field="*{user.currentWeight}"/>
                 <button type="submit" class="btn btn-primary" th:if="${user.weights.isEmpty()}">Enter your characteristics</button>
                 <button type="submit" class="btn btn-primary" th:if="not ${user.weights.isEmpty()}">Change your characteristics</button>
@@ -46,44 +46,44 @@
     <div class="row justify-content-md-center" id="monitor">
         <div class="col-4">
             <div>
-                <img th:src="@{/img/height.svg}" alt="" width="72" height="72">
+                <img th:src="@{/img/height.svg}" alt="" width="40%" height="auto">
             </div>
             <div class="currentDiv">
                 <span th:text="${user.height}">Height</span> m
             </div>
             <div class="thinDiv">
-                Healthy min weight:
-                <span th:text="${#numbers.formatDecimal(user.healthyMinWeight, 0, 'COMMA', 2, 'POINT')}"></span> Kg
+                Healthy min weight:<br>
+                <span th:text="${#numbers.formatDecimal(user.healthyMinWeight, 0, 'COMMA', 2, 'POINT')}"></span> kg
             </div>
         </div>
         <div class="col-4">
             <div>
-                <img th:src="@{/img/bmi.svg}" alt="" width="72" height="72">
+                <img th:src="@{/img/bmi.svg}" alt="" width="40%" height="auto">
             </div>
             <div class="currentDiv">
                 <span th:text="${#numbers.formatDecimal(user.currentBMI, 0, 'COMMA', 2, 'POINT')}">BMI</span>
             </div>
             <div class="bg-danger" th:if="${user.currentBMI > 25}">
-                Minimum to lose:
-                <span th:text="${#numbers.formatDecimal(user.weightToLose, 0, 'COMMA', 2, 'POINT')}"></span> Kg
+                Minimum to lose:<br>
+                <span th:text="${#numbers.formatDecimal(user.weightToLose, 0, 'COMMA', 2, 'POINT')}"></span> kg
             </div>
             <div class="bg-success" th:if="${user.currentBMI <= 25 && user.currentBMI >= 18.5}">
                 You have an healthy BMI
             </div>
             <div class="bg-danger" th:if="${user.currentBMI < 18.5}">
-                Minimum to take:
-                <span th:text="${#numbers.formatDecimal(user.weightToLose, 0, 'COMMA', 2, 'POINT')}"></span> Kg
+                Minimum to take:<br>
+                <span th:text="${#numbers.formatDecimal(user.weightToLose, 0, 'COMMA', 2, 'POINT')}"></span> kg
             </div>
         </div>
         <div class="col-4">
             <div>
-                <img th:src="@{/img/weight.svg}" alt="" width="72" height="72">
+                <img th:src="@{/img/weight.svg}" alt="" width="40%" height="auto">
             </div>
             <div class="currentDiv">
                 <span th:text="${user.currentWeight}">Current weight</span> Kg
             </div>
             <div class="fatDiv">
-                Healthy max weight:
+                Healthy max weight:<br>
                 <span th:text="${#numbers.formatDecimal(user.healthyMaxWeight, 0, 'COMMA', 2, 'POINT')}"></span> Kg
             </div>
         </div>
@@ -107,7 +107,6 @@
             var options = {
                 vAxis: {
                     minValue: 40,
-                    viewWindowMode: "explicit",
                     viewWindow: {
                         min: 50
                     }
@@ -119,14 +118,15 @@
                     width: "90%"
                 },
                 ticks: [50, 60, 70, 80, 90, 100],
+                seriesType: 'lines',
                 series: {
-                        0: { color: '#28a745' },
-                        1: { color: '#8B008B' },
-                        2: { color: '#FF8C00' },
+                        0: { color: '#28a745', pointSize: 8 },
+                        1: { color: '#8B008B', pointSize: 0 },
+                        2: { color: '#FF8C00', pointSize: 0 },
                 }
             };
 
-            var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+            var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
             chart.draw(data, options);
         }
     </script>
