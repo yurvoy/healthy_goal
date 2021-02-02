@@ -137,6 +137,10 @@ and (min-width : 320px) {
         width: 95%;
         margin: 1em auto;
     }
+    .svgResp {
+        width: 85%;
+        height: auto;
+    }
 }
 
 @media only screen
@@ -147,6 +151,10 @@ and (min-width : 768px) {
     #monitor {
         width: 80%;
         margin: 1em auto;
+    }
+    .svgResp {
+        width: 65%;
+        height: auto;
     }
 }
 
@@ -159,6 +167,10 @@ and (min-width : 1200px) {
         width: 70%;
         margin: 1em auto;
     }
+    .svgResp {
+        width: 50%;
+        height: auto;
+    }
 }
 
 @media only screen
@@ -169,5 +181,9 @@ and (min-width : 1600px) {
     #monitor {
         width: 65%;
         margin: 1em auto;
+    }
+    .svgResp {
+        width: 40%;
+        height: auto;
     }
 }
