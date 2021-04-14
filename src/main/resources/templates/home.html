@@ -18,9 +18,6 @@
         <a class="navbar-brand" href="#">
             <span style="font-size: 1em;"><i class="fas fa-walking"></i></span>
             HEALTHY GOAL | Welcome <span th:text="${user.name}"></span>
-            <img class="rounded-circle" width="30" height="30"
-                 th:src="@{user.picture}"
-                 onerror=this.src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAM1BMVEXk5ueutLfn6eqrsbTp6+zg4uOwtrnJzc/j5earsbW0uby4vcDQ09XGyszU19jd3+G/xMamCvwDAAAFLklEQVR4nO2d2bLbIAxAbYE3sDH//7WFbPfexG4MiCAcnWmnrzkjIRaD2jQMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMw5wQkHJczewxZh2lhNK/CBOQo1n0JIT74/H/qMV0Z7GU3aCcVPuEE1XDCtVLAhgtpme7H0s1N1U7QjO0L8F7llzGeh1hEG/8Lo7TUmmuSrOfns9xnGXpXxsONPpA/B6OqqstjC6Ax/0ujkNdYQQbKNi2k64qiiEZ+ohi35X+2YcZw/WujmslYewiAliVYrxgJYrdwUmwXsU+RdApUi83oNIE27YvrfB/ZPg8+BJETXnqh9CVzBbTQHgojgiCvtqU9thFJg/CKz3VIMKMEkIXxIWqIpIg2SkjYj+xC816mrJae2aiWGykxRNsW0UwiJghJDljYI5CD8GRiCtIsJxizYUPQ2pzItZy5pcisTRdk/a9m4amtNNfBuQkdVhSaYqfpNTSFGfb9GRIakrE2Pm+GFLaCQPqiu0OpWP+HMPQQcgQMiQprWXNmsVwIjQjYi/ZrhAqNTCgr2gu0Jnz85RSSjso0HkMFZ0YZjKkc26a/jlmh9JiDyDxi9oeorTYAzZkwwoMz19pzj9bnH/GP/+qbchjSGflneWYhtTuKdMOmNKZcJ5TjInQKcYXnESd/jQxy0ENpULTNGOGgxpap/oyw9pbUAqhfx2Dbkhovvfgz4iUzoM9+GlK6/Mh4q29hyC1mwro30hpVVLPF9wYQr71RazOeM5/cw81iBRD+A03aM9/C/obbrKjbYSpCmIVG3qT/Q8oeUo3Rz0IL7vI1tEbCB9pSiu8I/aV8x3Kg/BGWrWp4ZVs0nZfmAoEG4h/61yHYIJiFSl6Q0Vk6tTW1N8kYp8hdOkfHYYMXd2Qft+8CYwqYDSKvqIh+MCF8Wgca2u/cwdgeW3TtuVn6+1oBs3yLo5C2JpK6CvQzGpfUkz9UG/87gCsi5o2LIXolxN0FbwAsjOLEr+YJmXn7iR6N0BCt5p5cMxm7eAsfS+/CACQf4CTpKjzgkvr2cVarVTf96372yut7XLJ1sa7lv6VcfgYrWaxqr3Wlo1S6pvStr22sxOtTNPLzdY3nj20bPP+ejFdJYkLsjGLdtPBEbe/mr2bQKiXWJDroA+vtzc0p9aahuwqHMDYrQEXHEw9jwQl3drMpts9JBU1SdktPe5FBRdJQ6bwXBpa57ib2A8kukQDzMjh++Uo7Fo6Wd02Pkf4fknqoo4HtvAIjsqUcjx6DIPgWCaOML9rKI/oqD9/lgNrn+eF+p7j8tnzHBiR7+kdUGw/+V1Kzkc75mMy6U+FMaxjPibiM1U1uGM+puInHpmALZCgP4pt7i840MV8+0R1zPsRB6UTcqpizncYwZ89syDydfyWCwXB1l8/zRNGWbTG/GHKUm9AkxHMc/EGSk3z2+ArEhPEV5TUBLEvUGFcjEUH80J/jveTGOAJEljJbILWGQT3zRYiwuKsUXN1EEJAzBhRJFll7mBUG7KD8EqPkKekBREaL8hMDZLQSG6AQjtHPYmvTQnX0TtpC1SYCe2YdkkyLP3jj5BSbKiuR585eQhTgoje6yIb0Yb0C+mV6EYvebqw5SDy2WmubogZiF2AVxPC2FpDf8H2Q9QWo6IkjUxTWVEI3WY/wrCeSuqJ+eRWzXR/JXwgVjUMozbCOfoEZiSiKVGepqv5CJ8RyR4D7xBeamqa7z3BJ/z17JxuBPdv93d/a2Ki878MMAzDMAzDMAzDMAzDMF/KP09VUmxBAiI3AAAAAElFTkSuQmCC">
         </a>
         <ul class="nav navbar-nav navbar-right">
             <li><a th:href="@{/logout}">
@@ -36,9 +33,9 @@
     <div class="row">
         <form method="POST" action="/setter" modelAttribute="user">
             <div class="form-inline">
-                <label>Height </label>
+                <label>Height (m)</label>
                 <input type="text" th:field="*{user.height}"/>
-                <label>Weight</label>
+                <label>Weight (kg)</label>
                 <input type="text" th:field="*{user.currentWeight}"/>
                 <button type="submit" class="btn btn-primary" th:if="${user.weights.isEmpty()}">Enter your characteristics</button>
                 <button type="submit" class="btn btn-primary" th:if="not ${user.weights.isEmpty()}">Change your characteristics</button>
@@ -46,44 +43,50 @@
         </form>
     </div>
 
-    <div class="row">
-        <div id="data">
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>
-                            <img th:src="@{/img/height.svg}" alt="" width="72" height="72">
-                        </th>
-                        <th>
-                            <img th:src="@{/img/weight.svg}" alt="" width="72" height="72">
-                        </th>
-                        <th>
-                            <img th:src="@{/img/bmi.svg}" alt="" width="72" height="72">
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <span th:text="${user.height}">Height</span> m
-                        </td>
-                        <td>
-                            <span th:text="${user.currentWeight}">Current weight</span> Kg
-                        </td>
-                        <td>
-                            <span th:text="${#numbers.formatDecimal(user.currentBMI, 0, 'COMMA', 2, 'POINT')}">BMI</span>
-                        </td>
-                    </tr>
-                    <tr th:if="not ${user.weightToLose == 0}">
-                        <td></td>
-                        <td>
-                            Minimum weight to lose:
-                            <span th:text="${#numbers.formatDecimal(user.weightToLose, 0, 'COMMA', 2, 'POINT')}">Weight to lose</span> Kg
-                        </td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
+    <div class="row justify-content-md-center" id="monitor">
+        <div class="col-4">
+            <div>
+                <img class="svgResp" th:src="@{/img/height.svg}" alt="">
+            </div>
+            <div class="currentDiv">
+                <span th:text="${user.height}">Height</span> m
+            </div>
+            <div class="thinDiv">
+                Healthy min weight:<br>
+                <span th:text="${#numbers.formatDecimal(user.healthyMinWeight, 0, 'COMMA', 2, 'POINT')}"></span> kg
+            </div>
+        </div>
+        <div class="col-4">
+            <div>
+                <img class="svgResp" th:src="@{/img/bmi.svg}" alt="">
+            </div>
+            <div class="currentDiv">
+                <span th:text="${#numbers.formatDecimal(user.currentBMI, 0, 'COMMA', 2, 'POINT')}">BMI</span>
+            </div>
+            <div class="bg-danger" th:if="${user.currentBMI > 25}">
+                Minimum to lose:<br>
+                <span th:text="${#numbers.formatDecimal(user.weightToLose, 0, 'COMMA', 2, 'POINT')}"></span> kg
+            </div>
+            <div class="bg-success" th:if="${user.currentBMI <= 25 && user.currentBMI >= 18.5}">
+                You have a good BMI:<br>
+                18.5 < Healthy < 25
+            </div>
+            <div class="bg-danger" th:if="${user.currentBMI < 18.5}">
+                Minimum to take:<br>
+                <span th:text="${#numbers.formatDecimal(user.weightToLose, 0, 'COMMA', 2, 'POINT')}"></span> kg
+            </div>
+        </div>
+        <div class="col-4">
+            <div>
+                <img class="svgResp" th:src="@{/img/weight.svg}" alt="">
+            </div>
+            <div class="currentDiv">
+                <span th:text="${user.currentWeight}">Current weight</span> kg
+            </div>
+            <div class="fatDiv">
+                Healthy max weight:<br>
+                <span th:text="${#numbers.formatDecimal(user.healthyMaxWeight, 0, 'COMMA', 2, 'POINT')}"></span> kg
+            </div>
         </div>
     </div>
 
@@ -94,7 +97,7 @@
 
         function drawChart() {
             var data = google.visualization.arrayToDataTable([
-                ['Date', 'Your weight', 'Max healthy', 'Min healthy'],
+                ['Date', 'Your weight', 'Healthy max', 'Healthy min'],
 
                 /*[# th:each="weight: ${user.weights}"]*/
                 [ [[${#dates.format(weight.key, 'dd-MM-yyyy')}]], [[${weight.value}]],
@@ -103,29 +106,28 @@
             ]);
 
             var options = {
-                title: 'Your progress:',
                 vAxis: {
                     minValue: 40,
-                    viewWindowMode: "explicit",
                     viewWindow: {
-                        min: 55
+                        min: 50
                     }
                 },
                 chartArea: {
-                    left: "10%",
-                    right: "10%",
+                    left: "12%",
+                    right: "12%",
                     height: "80%",
-                    width: "80%"
+                    width: "90%"
                 },
                 ticks: [50, 60, 70, 80, 90, 100],
+                seriesType: 'lines',
                 series: {
-                        0: { color: 'blue' },
-                        1: { color: 'green' },
-                        2: { color: 'red' },
+                        0: { color: '#28a745', pointSize: 8 },
+                        1: { color: '#8B008B', pointSize: 0 },
+                        2: { color: '#FF8C00', pointSize: 0 },
                 }
             };
 
-            var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+            var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
             chart.draw(data, options);
         }
     </script>
@@ -135,10 +137,9 @@
 
     <div class="row justify-content-md-center" id="advies">
         <div class="col-auto card">
-            <span th:text="${T(be.intecbrussel.healthy_goal.model.Advies).getAdvies()}">value</span>
+            <span th:text="${T(be.intecbrussel.healthy_goal.model.Advice).getAdvice()}">value</span>
         </div>
     </div>
-
 
     <div class="row justify-content-md-center" id="history" th:if="not ${user.weights.isEmpty()}">
         <div class="row border-bottom">
@@ -152,12 +153,12 @@
         <tr th:each="weight : ${user.weights}">
             <div class="row border-bottom">
                 <div class="col-10">
-                        <span th:text="${weightStat.index}">index</span>
-                        - <span th:text="${#dates.format(weight.key)}"></span>
-                        - <span th:text="${weight.value}">value</span>Kg
+                        <span th:text="${#dates.format(weight.key)}"></span>
+                        - <span th:text="${weight.value}">value</span>kg
                 </div>
                 <div class="col-2">
                     <form class="buttonForm" method="POST" action="/deleteValue">
+                        <input type="hidden" name="key" th:value="${weight.key}"/>
                         <button type="submit" class="btn btn-primary btn-sm">X</button>
                     </form>
                 </div>
