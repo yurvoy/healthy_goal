@@ -38,11 +38,17 @@ public class GithubOAuth2User implements OAuth2User {
     }
 
     public String getFullName(){
-        return oAuth2User.getAttribute("login");
+        if (oAuth2User.getAttribute("name") != null) {
+            return oAuth2User.getAttribute("name");
+        }
+        return "Anonymous";
     }
 
     public String getPicture() {
-        return oAuth2User.getAttribute("avatar_url");
+        if (oAuth2User.getAttribute("avatar_url") != null) {
+            return oAuth2User.getAttribute("avatar_url");
+        }
+        return null;
     }
 
 }

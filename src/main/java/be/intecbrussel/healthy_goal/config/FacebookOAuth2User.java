@@ -39,4 +39,8 @@ public class FacebookOAuth2User implements OAuth2User {
         return oAuth2User.getAttribute("name");
     }
 
+    public String getPicture() {
+        return null;
+    }
+
 }

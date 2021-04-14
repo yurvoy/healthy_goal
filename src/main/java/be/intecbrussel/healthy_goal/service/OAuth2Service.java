@@ -36,7 +36,7 @@ public class OAuth2Service extends DefaultOAuth2UserService {
         AuthProvider provider;
         String picture;
 
-        if (oAuth2User.getAttribute("email") == null) {
+        if (oAuth2User.getAttribute("avatar_url") != null) {
             id = githubOAuth2User.getId();
             email = githubOAuth2User.getName();
             name = githubOAuth2User.getFullName();
@@ -52,7 +52,7 @@ public class OAuth2Service extends DefaultOAuth2UserService {
             id = facebookOAuth2User.getId();
             email = facebookOAuth2User.getName();
             name = facebookOAuth2User.getFullName();
-            picture = null;
+            picture = facebookOAuth2User.getPicture();
             provider = AuthProvider.FACEBOOK;
         }
 
