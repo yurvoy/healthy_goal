@@ -1,6 +1,7 @@
 package be.intecbrussel.healthy_goal.controller;
 
 import be.intecbrussel.healthy_goal.dao.UserDAO;
+import be.intecbrussel.healthy_goal.model.Advice;
 import be.intecbrussel.healthy_goal.model.User;
 import be.intecbrussel.healthy_goal.service.OAuth2Service;
 import lombok.extern.slf4j.Slf4j;
@@ -23,8 +24,10 @@ public class HomeController {
     @RequestMapping(value = "/")
     public String home(Principal principal, Model model) {
         User user = userDAO.findByEmail(principal.getName());
+        Advice advice = new Advice();
 
         model.addAttribute("user", user);
+        model.addAttribute("advice", advice);
 
         return "home";
     }

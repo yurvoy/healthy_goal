@@ -18,7 +18,7 @@ public class Advice {
             "excess weight creates high LDL cholesterol or high levels of triglycerides (Dyslipidemia) ?"
     };
 
-    public static String getAdvice() {
+    public String getAdvice() {
         int randomIndex = random.nextInt(ADVICE_LIST.length);
         return DID_YOU_KNOW + ADVICE_LIST[randomIndex];
     }
