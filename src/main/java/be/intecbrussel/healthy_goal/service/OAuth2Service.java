@@ -43,13 +43,13 @@ public class OAuth2Service extends DefaultOAuth2UserService {
             picture = githubOAuth2User.getPicture();
             provider = AuthProvider.GITHUB;
         } else if (oAuth2User.getAttribute("access_token") == null) {
-            id = githubOAuth2User.getId();
+            id = googleOAuth2User.getId();
             email = googleOAuth2User.getName();
             name = googleOAuth2User.getFullName();
             picture = googleOAuth2User.getPicture();
             provider = AuthProvider.GOOGLE;
         } else {
-            id = githubOAuth2User.getId();
+            id = facebookOAuth2User.getId();
             email = facebookOAuth2User.getName();
             name = facebookOAuth2User.getFullName();
             picture = null;
