@@ -37,19 +37,16 @@ public class OAuth2Service extends DefaultOAuth2UserService {
         String picture;
 
         if (oAuth2User.getAttribute("avatar_url") != null) {
-            id = githubOAuth2User.getId();
             email = githubOAuth2User.getName();
             name = githubOAuth2User.getFullName();
             picture = githubOAuth2User.getPicture();
             provider = AuthProvider.GITHUB;
         } else if (oAuth2User.getAttribute("access_token") == null) {
-            id = googleOAuth2User.getId();
             email = googleOAuth2User.getName();
             name = googleOAuth2User.getFullName();
             picture = googleOAuth2User.getPicture();
             provider = AuthProvider.GOOGLE;
         } else {
-            id = facebookOAuth2User.getId();
             email = facebookOAuth2User.getName();
             name = facebookOAuth2User.getFullName();
             picture = facebookOAuth2User.getPicture();
@@ -59,7 +56,7 @@ public class OAuth2Service extends DefaultOAuth2UserService {
         User user = userService.findByEmail(email);
 
         if(user == null) {
-            userService.createNewOAuth2User(email, id, name, picture, provider);
+            userService.createNewOAuth2User(email, name, picture, provider);
         } else {
             userService.updateOAuth2User(user, name, picture, provider);
         }

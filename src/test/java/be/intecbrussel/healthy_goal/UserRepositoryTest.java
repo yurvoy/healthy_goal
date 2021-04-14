@@ -15,7 +15,11 @@ public class UserRepositoryTest {
     @Test
     public void test() {
         //Save user test
-        User user = userDao.save(new User());
+        User user = new User();
+        user.setId("id");
+        user.setFullName("yvo urvoy");
+        user.setEmail("yvonnick.urvoy@gmail.com");
+        user.setPicture("https://fakeurl.com/epfoakeafp.jpg");
         userDao.save(user);
 
         //Remove Map data test

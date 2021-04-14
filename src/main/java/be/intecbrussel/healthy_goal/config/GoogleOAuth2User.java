@@ -24,11 +24,6 @@ public class GoogleOAuth2User implements OAuth2User {
         return oAuth2User.getAuthorities();
     }
 
-
-    public String getId(){
-        return oAuth2User.getAttribute("given_name");
-    }
-
     // principal.getName() must return email address !
     @Override
     public String getName() {

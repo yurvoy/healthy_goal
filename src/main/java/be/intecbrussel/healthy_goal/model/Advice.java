@@ -2,11 +2,11 @@ package be.intecbrussel.healthy_goal.model;
 
 import java.util.Random;
 
-public class Advies {
+public class Advice {
 
     static Random random = new Random();
-    private static String didYouKnow = "Did you know that ";
-    private static String[] advies = {
+    private static final String DID_YOU_KNOW = "Did you know that ";
+    private static final String[] ADVICE_LIST = {
             "there is strong evidence that higher levels of physical activity are linked to lower risk of several types of cancer ?",
             "some evidence that exercise is beneficial for bone health and sleep quality ?",
             "physical activity improves immune system function ?",
@@ -18,8 +18,8 @@ public class Advies {
             "excess weight creates high LDL cholesterol or high levels of triglycerides (Dyslipidemia) ?"
     };
 
-    public static String getAdvies() {
-        int randomIndex = random.nextInt(advies.length);
-        return didYouKnow + advies[randomIndex];
+    public static String getAdvice() {
+        int randomIndex = random.nextInt(ADVICE_LIST.length);
+        return DID_YOU_KNOW + ADVICE_LIST[randomIndex];
     }
 }

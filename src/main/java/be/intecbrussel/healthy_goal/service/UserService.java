@@ -22,9 +22,8 @@ public class UserService{
         return userDAO.findByEmail(email);
     }
 
-    public void createNewOAuth2User(String id, String email, String name, String picture, AuthProvider provider) {
+    public void createNewOAuth2User(String email, String name, String picture, AuthProvider provider) {
         User newUser = new User();
-        newUser.setId(id);
         newUser.setEmail(email);
         newUser.setFullName(name);
         newUser.setPicture(picture);

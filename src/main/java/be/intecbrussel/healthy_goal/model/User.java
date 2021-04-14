@@ -13,8 +13,9 @@ import java.util.TreeMap;
 @Table(name = "users")
 public class User implements Principal {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
-    private String id;
+    private Long id;
     @Column
     private String fullName;
     @Column
