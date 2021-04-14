@@ -77,7 +77,7 @@ public class HomeController {
     }
 
     @GetMapping("/deleteUser/{id}")
-    public String deleteUser(Principal principal, @PathVariable("id") String id) {
+    public String deleteUser(Principal principal, @PathVariable("id") Long id) {
         User user = userDAO.findByEmail(principal.getName());
 
         userDAO.deleteById(id);

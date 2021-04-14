@@ -16,7 +16,7 @@ public class UserRepositoryTest {
     public void test() {
         //Save user test
         User user = new User();
-        user.setId("id");
+        user.setId(1L);
         user.setFullName("yvo urvoy");
         user.setEmail("yvonnick.urvoy@gmail.com");
         user.setPicture("https://fakeurl.com/epfoakeafp.jpg");
