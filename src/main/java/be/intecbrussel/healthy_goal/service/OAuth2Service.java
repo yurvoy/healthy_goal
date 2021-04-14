@@ -51,7 +51,7 @@ public class OAuth2Service extends DefaultOAuth2UserService {
         } else {
             id = githubOAuth2User.getId();
             email = facebookOAuth2User.getName();
-            name = googleOAuth2User.getFullName();
+            name = facebookOAuth2User.getFullName();
             picture = null;
             provider = AuthProvider.FACEBOOK;
         }
