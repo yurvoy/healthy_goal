@@ -135,11 +135,11 @@
         <div class="row" id="chart_div" style="width: 100%; height: 500px;" th:if="not ${user.weights.isEmpty()}"></div>
     </div>
 
-    <div class="row justify-content-md-center" id="advies">
-        <div class="col-auto card">
-            <span th:text="${T(be.intecbrussel.healthy_goal.model.Advice).getAdvice()}">value</span>
-        </div>
-    </div>
+<!--    <div class="row justify-content-md-center" id="advies">-->
+<!--        <div class="col-auto card">-->
+<!--            <span th:text="${T(be.intecbrussel.healthy_goal.model.Advice).getAdvice()}">value</span>-->
+<!--        </div>-->
+<!--    </div>-->
 
     <div class="row justify-content-md-center" id="history" th:if="not ${user.weights.isEmpty()}">
         <div class="row border-bottom">
