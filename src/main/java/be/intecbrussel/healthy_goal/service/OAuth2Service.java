@@ -36,7 +36,7 @@ public class OAuth2Service extends DefaultOAuth2UserService {
         AuthProvider provider;
         String picture;
 
-        if (oAuth2User.getAttribute("name") == null) {
+        if (oAuth2User.getAttribute("email") == null) {
             id = githubOAuth2User.getId();
             email = githubOAuth2User.getName();
             name = githubOAuth2User.getFullName();
