@@ -16,7 +16,7 @@ public class User implements Principal {
     @Column
     private String id;
     @Column
-    private String name;
+    private String fullName;
     @Column
     private String email;
     @Column

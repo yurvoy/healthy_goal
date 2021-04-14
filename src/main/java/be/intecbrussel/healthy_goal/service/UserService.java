@@ -26,7 +26,7 @@ public class UserService{
         User newUser = new User();
         newUser.setId(id);
         newUser.setEmail(email);
-        newUser.setName(name);
+        newUser.setFullName(name);
         newUser.setPicture(picture);
         newUser.setProvider(provider);
 
@@ -34,7 +34,7 @@ public class UserService{
     }
 
     public void updateOAuth2User(User user, String name, String picture, AuthProvider provider) {
-        user.setName(name);
+        user.setFullName(name);
         user.setPicture(picture);
         user.setProvider(provider);
 
