@@ -1,12 +1,10 @@
 package be.intecbrussel.healthy_goal.dao;
 
 import be.intecbrussel.healthy_goal.model.User;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
-public interface UserDAO extends JpaRepository<User, Long> {
-    Optional<User> findByEmail(String email);
-
-
+@Repository
+public interface UserDAO extends CrudRepository<User, String> {
+    User findByEmail(String email);
 }
