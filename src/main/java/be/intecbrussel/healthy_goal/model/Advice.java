@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Advice {
 
-    static Random random = new Random();
+    private static Random random = new Random();
     private static final String DID_YOU_KNOW = "Did you know that ";
     private static final String[] ADVICE_LIST = {
             "there is strong evidence that higher levels of physical activity are linked to lower risk of several types of cancer ?",

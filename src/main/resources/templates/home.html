@@ -14,6 +14,8 @@
 <body>
 <!--/*@thymesVar id="user" type="be.intecbrussel.healthy_goal.model.User"*/-->
 <!--/*@thymesVar id="advice" type="be.intecbrussel.healthy_goal.model.Advice"*/-->
+<!--/*@thymesVar id="advies" type="be.intecbrussel.healthy_goal.model.Advies"*/-->
+<!--/*@thymesVar id="conseil" type="be.intecbrussel.healthy_goal.model.Conseil"*/-->
 <span th:text="#{lang.change}"></span>:
 <select id="locales">
     <option value=""></option>
@@ -150,7 +152,7 @@
     </div>
 
     <div class="row justify-content-md-center" id="advies">
-        <div class="col-auto card">
+        <div th:if="#{lang.eng} == 'English'" class="col-auto card">
             <span th:text="${advice.getAdvice()}"></span>
         </div>
     </div>

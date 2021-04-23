@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Advies {
 
-    static Random random = new Random();
+    private static Random random = new Random();
     private static final String DID_YOU_KNOW = "Wist je dat ";
     private static final String[] ADVICE_LIST = {
             "er zijn sterke aanwijzingen dat hogere niveaus van fysieke activiteit verband houden met een lager risico op verschillende soorten kanker?",
@@ -18,7 +18,7 @@ public class Advies {
             "overgewicht zorgt voor een hoog LDL-cholesterol of hoge triglycerideniveaus (dyslipidemie)?"
     };
 
-    public String getAdvice() {
+    public String getAdvies() {
         int randomIndex = random.nextInt(ADVICE_LIST.length);
         return DID_YOU_KNOW + ADVICE_LIST[randomIndex];
     }

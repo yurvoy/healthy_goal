@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Conseil {
 
-    static Random random = new Random();
+    private static Random random = new Random();
     private static final String DID_YOU_KNOW = "Saviez-vous ";
     private static final String[] ADVICE_LIST = {
             "qu'une bonne activité physique réduit le risque de contracter plusieurs types de cancer?",
@@ -18,7 +18,7 @@ public class Conseil {
             "que l'excès de poids crée un cholestérol LDL élevé ou des taux élevés de triglycérides (dyslipidémie)?"
     };
 
-    public String getAdvice() {
+    public String getConseil() {
         int randomIndex = random.nextInt(ADVICE_LIST.length);
         return DID_YOU_KNOW + ADVICE_LIST[randomIndex];
     }
