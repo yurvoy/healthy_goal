@@ -21,7 +21,7 @@ public class HomeController {
     @Autowired
     private UserDAO userDAO;
 
-    @RequestMapping(value = "/")
+    @RequestMapping({"","/", "/home"})
     public String home(Principal principal, Model model) {
         User user = userDAO.findByEmail(principal.getName());
         Advice advice = new Advice();

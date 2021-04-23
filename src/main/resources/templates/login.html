@@ -32,30 +32,50 @@
                 <span style="font-size: 3em;"> HEALTHY GOAL</span>
             </a>
             <a>
-                <span>choose one social account to connect</span>
+                <span th:text="#{lang.social}"></span>
             </a>
         </div>
         <div class="row">
             <a class="btn btn-outline-danger btn-lg btn-block" th:href="@{/oauth2/authorization/google}">
                 <span style="font-size: 2em; vertical-align: middle"><i class="fa fa-google-plus-square"></i></span>
-                <span>Login with <strong>Google</strong></span>
+                <span th:text="#{lang.login}"></span>
+                <span><strong>Google</strong></span>
             </a>
         </div>
         <div class="row">
             <a class="btn btn-outline-primary btn-lg btn-block" th:href="@{/oauth2/authorization/facebook}">
                 <span style="font-size: 2em; vertical-align: middle"><i class="fa fa-facebook-square"></i></span>
-                <span>Login with <strong>Facebook</strong></span>
+                <span th:text="#{lang.login}"></span>
+                <span><strong>Facebook</strong></span>
             </a>
         </div>
         <div class="row">
             <a class="btn btn-outline-dark btn-lg btn-block" th:href="@{/oauth2/authorization/github}">
                 <span style="font-size: 2em; vertical-align: middle"><i class="fa fa-github-square"></i></span>
-                <span>Login with <strong>Github</strong></span>
+                <span th:text="#{lang.login}"></span>
+                <span><strong>Github</strong></span>
             </a>
         </div>
+        <span th:text="#{lang.change}"></span>:
+        <select id="locales">
+            <option value=""></option>
+            <option value="en" th:text="#{lang.eng}"></option>
+            <option value="fr" th:text="#{lang.fr}"></option>
+            <option value="nl" th:text="#{lang.nl}"></option>
+        </select>
     </div>
 </div>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#locales").change(function () {
+            var selectedOption = $('#locales').val();
+            if (selectedOption != ''){
+                window.location.replace('?lang=' + selectedOption);
+            }
+        });
+    });
+</script>
 </body>
 
 </html>
