@@ -47,12 +47,12 @@
     <div class="row">
         <form method="POST" action="/setter" modelAttribute="user">
             <div class="form-inline">
-                <label>Height (m)</label>
+                <label><span th:text="#{lang.height}"></span> (m)</label>
                 <input type="text" th:field="*{user.height}"/>
-                <label>Weight (kg)</label>
+                <label><span th:text="#{lang.weight}"></span> (kg)</label>
                 <input type="text" th:field="*{user.currentWeight}"/>
-                <button type="submit" class="btn btn-primary" th:if="${user.weights.isEmpty()}">Enter your characteristics</button>
-                <button type="submit" class="btn btn-primary" th:if="not ${user.weights.isEmpty()}">Change your characteristics</button>
+                <button type="submit" class="btn btn-primary" th:if="${user.weights.isEmpty()}"><span th:text="#{lang.enter}"></span></button>
+                <button type="submit" class="btn btn-primary" th:if="not ${user.weights.isEmpty()}"><span th:text="#{lang.new}"></span></button>
             </div>
         </form>
     </div>
@@ -63,10 +63,10 @@
                 <img class="svgResp" th:src="@{/img/height.svg}" alt="">
             </div>
             <div class="currentDiv">
-                <span th:text="${user.height}">Height</span> m
+                <span th:text="${user.height}"><span th:text="#{lang.height}"></span></span> m
             </div>
             <div class="thinDiv">
-                Healthy min weight:<br>
+                <span th:text="#{lang.min}"></span><br>
                 <span th:text="${#numbers.formatDecimal(user.healthyMinWeight, 0, 'COMMA', 2, 'POINT')}"></span> kg
             </div>
         </div>
@@ -78,15 +78,15 @@
                 <span th:text="${#numbers.formatDecimal(user.currentBMI, 0, 'COMMA', 2, 'POINT')}">BMI</span>
             </div>
             <div class="bg-danger" th:if="${user.currentBMI > 25}">
-                Minimum to lose:<br>
+                <span th:text="#{lang.low}"></span><br>
                 <span th:text="${#numbers.formatDecimal(user.weightToLose, 0, 'COMMA', 2, 'POINT')}"></span> kg
             </div>
             <div class="bg-success" th:if="${user.currentBMI <= 25 && user.currentBMI >= 18.5}">
-                You have a good BMI:<br>
-                18.5 < Healthy < 25
+                <span th:text="#{lang.correct}"></span><br>
+                <span th:text="#{lang.healthy}"></span>
             </div>
             <div class="bg-danger" th:if="${user.currentBMI < 18.5}">
-                Minimum to take:<br>
+                <span th:text="#{lang.high}"></span><br>
                 <span th:text="${#numbers.formatDecimal(user.weightToLose, 0, 'COMMA', 2, 'POINT')}"></span> kg
             </div>
         </div>
@@ -95,10 +95,10 @@
                 <img class="svgResp" th:src="@{/img/weight.svg}" alt="">
             </div>
             <div class="currentDiv">
-                <span th:text="${user.currentWeight}">Current weight</span> kg
+                <span th:text="${user.currentWeight}"><span th:text="#{lang.your}"></span></span> kg
             </div>
             <div class="fatDiv">
-                Healthy max weight:<br>
+                <span th:text="#{lang.max}"></span><br>
                 <span th:text="${#numbers.formatDecimal(user.healthyMaxWeight, 0, 'COMMA', 2, 'POINT')}"></span> kg
             </div>
         </div>
@@ -151,24 +151,24 @@
 
     <div class="row justify-content-md-center" id="advies">
         <div class="col-auto card">
-            <span th:text="${advice.getAdvice()}">value</span>
+            <span th:text="${advice.getAdvice()}"></span>
         </div>
     </div>
 
     <div class="row justify-content-md-center" id="history" th:if="not ${user.weights.isEmpty()}">
         <div class="row border-bottom">
             <div class="col-10">
-                <strong>HISTORY</strong>
+                <strong><span th:text="#{lang.history}"></span></strong>
             </div>
             <div class="col-2">
-                Delete
+                <span th:text="#{lang.delete}"></span>
             </div>
         </div>
         <tr th:each="weight : ${user.weights}">
             <div class="row border-bottom">
                 <div class="col-10">
                         <span th:text="${#dates.format(weight.key)}"></span>
-                        - <span th:text="${weight.value}">value</span>kg
+                        - <span th:text="${weight.value}"></span>kg
                 </div>
                 <div class="col-2">
                     <form class="buttonForm" method="POST" action="/deleteValue">
@@ -181,7 +181,9 @@
         <div class="row">
             <div class="col-10">
                 <form method="POST" action="/clearData">
-                    <button type="submit" class="btn btn-primary btn-sm">Delete all history</button>
+                    <button type="submit" class="btn btn-primary btn-sm">
+                        <span th:text="#{lang.deleteAll}"></span>
+                    </button>
                 </form>
             </div>
         </div>
@@ -211,7 +213,7 @@
             </div>
             <div class="col-sm delete" id="delete-account">
                 <form th:action="@{/deleteUser/{id}(id=${user.id})}">
-                    <button type="submit" value="Submit" class="btn btn-danger">⚠ Delete account ⚠</button>
+                    <button type="submit" value="Submit" class="btn btn-danger"><span th:text="#{lang.deleteAccount}"></span></button>
                 </form>
             </div>
         </div>
